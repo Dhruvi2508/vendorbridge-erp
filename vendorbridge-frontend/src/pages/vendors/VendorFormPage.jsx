@@ -124,7 +124,7 @@ const VendorFormPage = () => {
             icon="category"
             options={[
               { value: '', label: 'Select Category' },
-              ...categories.map((c) => ({ value: String(c.id), label: c.category_name }))
+              ...categories.map((c) => ({ value: String(c.id), label: c.category_name || c.categoryName }))
             ]}
             error={errors.category_id}
             {...register('category_id')}

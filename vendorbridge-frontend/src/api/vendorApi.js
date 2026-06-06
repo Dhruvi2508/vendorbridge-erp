@@ -164,10 +164,20 @@ export const deleteVendor = async (id) => {
 export const getCategories = async () => {
   try {
     const res = await api.get('/api/vendor-categories');
-    return res.data;
+    return Array.isArray(res.data)
+      ? res.data.map((category) => ({
+          ...category,
+          category_name: category.category_name || category.categoryName || '',
+          categoryName: category.categoryName || category.category_name || '',
+        }))
+      : [];
   } catch (err) {
     if (!err.response) {
-      return MOCK_CATEGORIES;
+      return MOCK_CATEGORIES.map((category) => ({
+        ...category,
+        category_name: category.category_name || category.categoryName || '',
+        categoryName: category.categoryName || category.category_name || '',
+      }));
     }
     throw new Error(err.response?.data?.message || 'Failed to fetch categories.');
   }

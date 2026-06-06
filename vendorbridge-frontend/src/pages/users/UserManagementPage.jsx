@@ -18,7 +18,8 @@ const userSchema = zod.object({
   lastName: zod.string().min(1, 'Last name is required'),
   email: zod.string().email('Invalid email address'),
   phone: zod.string().min(10, 'Phone must be at least 10 digits'),
-  role: zod.enum(['ADMIN', 'PROCUREMENT_OFFICER', 'VENDOR', 'MANAGER'])
+  password: zod.string().min(6, 'Password must be at least 6 characters'),
+  role: zod.enum(['ADMIN', 'PROCUREMENT_OFFICER', 'VENDOR_MANAGER', 'APPROVER'])
 });
 
 const UserManagementPage = () => {
@@ -62,7 +63,7 @@ const UserManagementPage = () => {
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: zodResolver(userSchema),
-    defaultValues: { firstName: '', lastName: '', email: '', phone: '', role: 'PROCUREMENT_OFFICER' }
+    defaultValues: { firstName: '', lastName: '', email: '', phone: '', password: '', role: 'PROCUREMENT_OFFICER' }
   });
 
   const handleOpenAdd = () => {
@@ -199,13 +200,21 @@ const UserManagementPage = () => {
             error={errors.phone}
             {...register('phone')}
           />
+          <FormInput
+            label="Password"
+            type="password"
+            icon="lock"
+            placeholder="Create a temporary password"
+            error={errors.password}
+            {...register('password')}
+          />
           <FormSelect
             label="Security Role"
             icon="shield"
             options={[
               { value: 'PROCUREMENT_OFFICER', label: 'Procurement Officer' },
-              { value: 'VENDOR', label: 'Vendor / Supplier' },
-              { value: 'MANAGER', label: 'Manager / Approver' },
+              { value: 'VENDOR_MANAGER', label: 'Vendor / Supplier' },
+              { value: 'APPROVER', label: 'Manager / Approver' },
               { value: 'ADMIN', label: 'Administrator' }
             ]}
             error={errors.role}
