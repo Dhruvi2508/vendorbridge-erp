@@ -1,0 +1,37 @@
+export const ROLES = {
+  ADMIN: 'ADMIN',
+  PROCUREMENT_OFFICER: 'PROCUREMENT_OFFICER',
+  VENDOR: 'VENDOR',
+  MANAGER: 'MANAGER',
+};
+
+export const VENDOR_STATUS = {
+  VERIFIED: 'Verified',
+  PENDING: 'Pending',
+  BLACKLISTED: 'Blacklisted',
+};
+
+export const RFQ_STATUS = {
+  OPEN: 'OPEN',
+  CLOSED: 'CLOSED',
+  DRAFT: 'DRAFT',
+};
+
+export const QUOTATION_STATUS = {
+  SUBMITTED: 'SUBMITTED',
+  PENDING_APPROVAL: 'PENDING_APPROVAL',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+};
+
+export const PO_STATUS = {
+  DRAFT: 'DRAFT',
+  ISSUED: 'ISSUED',
+  COMPLETED: 'COMPLETED',
+};
+
+export const INVOICE_STATUS = {
+  GENERATED: 'GENERATED',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+};
