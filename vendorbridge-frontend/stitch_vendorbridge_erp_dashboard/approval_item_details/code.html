@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Approval Details - VendorBridge</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#6b5500",
+                    "surface-dim": "#dadada",
+                    "on-secondary-fixed": "#2b1700",
+                    "outline": "#7f7663",
+                    "on-primary-fixed": "#241a00",
+                    "primary-container": "#f3ca4a",
+                    "on-surface": "#1a1c1c",
+                    "outline-variant": "#d0c5af",
+                    "inverse-surface": "#2f3131",
+                    "tertiary": "#5f5e5e",
+                    "tertiary-fixed": "#e4e2e2",
+                    "surface-container": "#efeeed",
+                    "on-tertiary-container": "#585857",
+                    "primary": "#745b00",
+                    "surface-container-high": "#e9e8e8",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "on-secondary-fixed-variant": "#663e00",
+                    "surface-container-low": "#f4f3f3",
+                    "primary-fixed": "#ffe08a",
+                    "primary-fixed-dim": "#ebc243",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "on-secondary-container": "#784a03",
+                    "secondary-fixed-dim": "#faba6e",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#fdbd70",
+                    "on-primary-fixed-variant": "#574400",
+                    "inverse-on-surface": "#f1f0f0",
+                    "tertiary-container": "#d0cece",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface": "#faf9f9",
+                    "inverse-primary": "#ebc243",
+                    "surface-container-highest": "#e3e2e2",
+                    "surface-bright": "#faf9f9",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#84540f",
+                    "on-surface-variant": "#4d4635",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "surface-tint": "#745b00",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#ffddb9",
+                    "surface-variant": "#e3e2e2",
+                    "background": "#faf9f9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "xl": "32px",
+                    "lg": "24px",
+                    "gutter": "24px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "container-margin": "32px",
+                    "base": "4px",
+                    "2xl": "48px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-xl": ["Hanken Grotesk"],
+                    "label-md": ["JetBrains Mono"],
+                    "body-md": ["Hanken Grotesk"],
+                    "body-sm": ["Hanken Grotesk"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-sm": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["13px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #F3F6F4;
+            font-family: 'Hanken Grotesk', sans-serif;
+        }
+        .bento-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.03);
+            transition: box-shadow 0.2s ease;
+        }
+        .bento-card:hover {
+            box-shadow: 0px 8px 24px rgba(0,0,0,0.06);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d0c5af;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-container-low text-primary dark:text-primary-fixed docked full-width top-0 sticky z-40 border-b border-outline-variant dark:border-outline shadow-sm flex justify-between items-center w-full px-lg h-16">
+<div class="flex items-center gap-xl">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">VendorBridge</span>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors px-sm py-xs rounded cursor-pointer active:scale-95" href="#">Global Support</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors px-sm py-xs rounded cursor-pointer active:scale-95" href="#">Analytics</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-sm focus:outline-none focus:ring-2 focus:ring-primary/20 w-64 transition-all" placeholder="Search procurement..." type="text"/>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Executive User Profile" data-alt="A professional headshot of a corporate executive in a modern, brightly lit office environment. The executive is wearing a sharp charcoal suit with a crisp white shirt, exuding confidence and authority. The lighting is high-key and professional, matching a clean light-mode enterprise aesthetic. The background is softly blurred to emphasize the individual's presence as a decision-maker." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfBhBaAMo0tzfDEai16LJC2_ZCUPuHvggVnq7Bhu1IIpBzmh2m9N3A_RVzo98TYsoWgwOZh6zWk13ey0XaPyZZZ3VpMTRRT8syyetL2ym9-W4OBrAhk9Zm6KCjIwQciO8ah8OVJVzIFq0F-gor9KE1rwHAdKNQyMJ0i7iBQP1PoLrUabyGgez2_d10bR3pwViVecu8Alz-5uP9C7KSESpcvjy0vFFZXCOB3LRekr4QaRC3oYHa4079XxSax9D-Wso142Y1BtSr_Mla"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[280px] z-50 bg-surface-container dark:bg-surface-dim border-r border-outline-variant dark:border-outline flex flex-col p-md gap-sm">
+<div class="flex items-center gap-md px-sm py-lg">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-on-surface dark:text-on-surface">VendorBridge</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Enterprise Procurement</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1 overflow-y-auto custom-scrollbar">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span> Vendors
+            </a>
+<a class="flex items-center gap-md px-md py-sm bg-primary-container text-on-primary-container font-bold rounded-lg transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="request_quote">request_quote</span> RFQs
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span> Contracts
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span> Purchase Orders
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span> Invoices
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span> Supply Chain
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span> Inventory
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span> Compliance
+            </a>
+</nav>
+<div class="mt-auto pt-md border-t border-outline-variant">
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-bold flex items-center justify-center gap-sm mb-md active:scale-95 transition-transform shadow-md">
+<span class="material-symbols-outlined">add</span> New Request
+            </button>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span> Help Center
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="manage_accounts">manage_accounts</span> Account Settings
+            </a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-[280px] p-xl min-h-screen">
+<!-- Breadcrumbs & Header -->
+<div class="mb-xl flex justify-between items-end">
+<div>
+<nav class="flex items-center gap-xs text-on-surface-variant font-label-sm text-label-sm mb-xs">
+<span>Approvals</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary">RFQ-2024-0892</span>
+</nav>
+<h2 class="font-headline-lg text-headline-lg flex items-center gap-md">
+                    Purchase Request: High-Precision CNC Lathe
+                    <span class="px-md py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full font-label-sm text-label-sm">AWAITING APPROVAL</span>
+</h2>
+</div>
+<div class="flex gap-md">
+<button class="flex items-center gap-sm px-lg py-md rounded-lg border border-outline text-on-surface hover:bg-surface-container transition-colors active:scale-95 font-headline-sm text-[16px]">
+<span class="material-symbols-outlined" data-icon="share">share</span> Share
+                </button>
+<button class="flex items-center gap-sm px-lg py-md rounded-lg border border-outline text-on-surface hover:bg-surface-container transition-colors active:scale-95 font-headline-sm text-[16px]">
+<span class="material-symbols-outlined" data-icon="print">print</span> Print
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-lg">
+<!-- Left Column: Details & Audit Trail -->
+<div class="col-span-8 space-y-lg">
+<!-- Detailed View Card -->
+<section class="bento-card p-lg rounded-xl">
+<div class="flex justify-between items-center mb-lg border-b border-outline-variant pb-md">
+<h3 class="font-headline-sm text-headline-sm">Request Overview</h3>
+<div class="flex gap-xl">
+<div class="text-right">
+<p class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">Total Value</p>
+<p class="font-headline-md text-headline-md text-primary">$184,500.00</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-xl">
+<div class="space-y-md">
+<div>
+<label class="block text-on-surface-variant font-label-sm text-label-sm mb-1">Vendor Name</label>
+<p class="font-body-md text-body-md font-semibold text-on-surface">Precision Dynamics GmbH</p>
+</div>
+<div>
+<label class="block text-on-surface-variant font-label-sm text-label-sm mb-1">Project Code</label>
+<p class="font-body-md text-body-md text-on-surface">EXP-2024-IND-77</p>
+</div>
+<div>
+<label class="block text-on-surface-variant font-label-sm text-label-sm mb-1">Requested By</label>
+<div class="flex items-center gap-sm mt-1">
+<div class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center text-[10px] font-bold">SM</div>
+<p class="font-body-md text-body-md text-on-surface">Sarah Miller (Operations Head)</p>
+</div>
+</div>
+</div>
+<div class="space-y-md">
+<div>
+<label class="block text-on-surface-variant font-label-sm text-label-sm mb-1">Request Date</label>
+<p class="font-body-md text-body-md text-on-surface">Oct 24, 2024</p>
+</div>
+<div>
+<label class="block text-on-surface-variant font-label-sm text-label-sm mb-1">Expected Delivery</label>
+<p class="font-body-md text-body-md text-on-surface">Dec 15, 2024</p>
+</div>
+<div>
+<label class="block text-on-surface-variant font-label-sm text-label-sm mb-1">Priority</label>
+<p class="font-body-md text-body-md flex items-center gap-xs text-on-error-container">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">priority_high</span> High Priority
+                                </p>
+</div>
+</div>
+</div>
+<div class="mt-lg">
+<label class="block text-on-surface-variant font-label-sm text-label-sm mb-md">Description</label>
+<div class="p-md bg-surface-container-low rounded-lg border border-outline-variant italic text-body-md text-on-surface">
+                            "Urgent replacement of the existing unit in Bay 4. Current machinery has exceeded its operational life and is causing a 12% bottleneck in production throughput. Request includes installation, training for 4 operators, and a 3-year gold-tier maintenance contract."
+                        </div>
+</div>
+</section>
+<!-- Audit Trail Timeline -->
+<section class="bento-card p-lg rounded-xl">
+<h3 class="font-headline-sm text-headline-sm mb-lg">Approval Workflow &amp; Audit Trail</h3>
+<div class="space-y-xl relative before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-outline-variant">
+<!-- History Item 1 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[14px] text-on-primary" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface">Request Created</p>
+<p class="text-body-sm text-on-surface-variant">Submitted by Sarah Miller</p>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Oct 24, 09:12 AM</p>
+</div>
+</div>
+<!-- History Item 2 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[14px] text-on-primary" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface">Budgetary Review Cleared</p>
+<p class="text-body-sm text-on-surface-variant">Automated system check successful. Sufficient CAPEX budget allocated.</p>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Oct 24, 09:15 AM</p>
+</div>
+</div>
+<!-- History Item 3 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[14px] text-on-primary" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface">Technical Approval</p>
+<p class="text-body-sm text-on-surface-variant">Approved by Marcus Chen (Eng Director)</p>
+<p class="mt-sm p-sm bg-surface-container rounded-lg text-body-sm border-l-4 border-primary">"Specifications verified. Vendor is Tier-1 compliant."</p>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Oct 25, 02:45 PM</p>
+</div>
+</div>
+<!-- Current Step -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full border-4 border-primary bg-surface z-10"></div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-body-md text-body-md font-bold text-primary">Executive Final Approval</p>
+<p class="text-body-sm text-on-surface-variant italic">Currently with you (Chief Financial Officer)</p>
+</div>
+<p class="font-label-sm text-label-sm text-primary animate-pulse">PENDING</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Previews & Action -->
+<div class="col-span-4 space-y-lg">
+<!-- Action Panel -->
+<section class="bento-card p-lg rounded-xl border-2 border-primary-container">
+<h3 class="font-headline-sm text-headline-sm mb-md">Review Action</h3>
+<div class="space-y-md">
+<div>
+<label class="block text-on-surface-variant font-label-sm text-label-sm mb-2">Comments (Mandatory for rejection)</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-md text-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Enter your review notes here..." rows="4"></textarea>
+</div>
+<div class="flex gap-md pt-md">
+<button class="flex-1 py-4 border-2 border-outline text-on-surface font-bold rounded-xl hover:bg-error-container hover:border-error hover:text-on-error-container transition-all active:scale-95 flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined">close</span> Reject
+                            </button>
+<button class="flex-1 py-4 bg-primary-container text-on-primary-container font-bold rounded-xl shadow-lg hover:shadow-xl hover:brightness-105 transition-all active:scale-95 flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span> Approve
+                            </button>
+</div>
+<p class="text-center text-body-sm text-on-surface-variant mt-md">Action will be logged as CFO approval.</p>
+</div>
+</section>
+<!-- Document Previews -->
+<section class="bento-card p-lg rounded-xl">
+<h3 class="font-headline-sm text-headline-sm mb-lg">Attachments (3)</h3>
+<div class="space-y-md">
+<!-- Doc 1 -->
+<div class="group flex items-center gap-md p-md bg-surface-container-low rounded-lg border border-outline-variant hover:border-primary transition-colors cursor-pointer">
+<div class="w-12 h-12 bg-surface-container-highest rounded flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[32px]">picture_as_pdf</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-body-md font-semibold truncate">Detailed_Quote_PD_GmbH.pdf</p>
+<p class="text-label-sm text-on-surface-variant">2.4 MB • Oct 24, 2024</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">download</span>
+</div>
+<!-- Doc 2 -->
+<div class="group flex items-center gap-md p-md bg-surface-container-low rounded-lg border border-outline-variant hover:border-primary transition-colors cursor-pointer">
+<div class="w-12 h-12 bg-surface-container-highest rounded flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[32px]">analytics</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-body-md font-semibold truncate">ROI_Analysis_Q4_v2.xlsx</p>
+<p class="text-label-sm text-on-surface-variant">1.1 MB • Oct 24, 2024</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">download</span>
+</div>
+<!-- Doc 3 (Image Preview) -->
+<div class="group relative aspect-video w-full rounded-lg overflow-hidden border border-outline-variant hover:border-primary transition-all cursor-pointer">
+<img alt="Technical Drawing Preview" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean, cinematic photograph of a high-tech CNC lathe machine in a pristine industrial facility. The lighting is dramatic and precise, highlighting the metallic textures and yellow safety accents of the machinery. The setting is modern and professional, reflecting an advanced manufacturing environment with a light-mode corporate aesthetic. Soft blue and gold highlights emphasize the precision and value of the asset." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVjIKdCCAnH2mS8f-0rbXdn0elawgfC5eOmLCLJ4ShampRwHyaDPKiTvQjz2y-pU2qbYQEhWCBKg9BTinrIltDn3V9PUCOq505OeAGsknJhwWuQxQriYwc66j7S4mrrzxiQV7lXEz9QKJElH7wBJp-4jXlaYaYn_Ol_AXJLwttoULf_dHag0Xt7euDHxv6aSdTOML_UZbisjm6gCaMGa_NMtqz5-DzI4yTZnxhy-rWpP6erpjDV0l33k40JqLu1-SL2cN33RMczUlC"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-md opacity-0 group-hover:opacity-100 transition-opacity">
+<p class="text-white text-body-sm font-medium">Machine_Specs_Visual.jpg</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Stats Info -->
+<div class="p-lg bg-surface-container-highest rounded-xl border border-outline-variant">
+<div class="flex items-start gap-md">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">info</span>
+<div>
+<p class="font-body-md font-bold text-on-surface">Vendor Scorecard</p>
+<p class="text-body-sm text-on-surface-variant mb-md">Precision Dynamics is a 'Gold' rated supplier with 98.4% on-time delivery rate.</p>
+<div class="w-full bg-surface-container-low h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[94%]"></div>
+</div>
+<p class="text-[10px] mt-1 font-label-md text-on-surface-variant text-right">CREDIBILITY SCORE: 94/100</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-high text-secondary dark:text-secondary-fixed w-full border-t border-outline-variant dark:border-outline flex justify-between items-center px-lg py-md ml-[280px]">
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 VendorBridge ERP. All rights reserved.</p>
+<div class="flex gap-lg">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed underline transition-all opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed underline transition-all opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed underline transition-all opacity-80 hover:opacity-100" href="#">Security Compliance</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed underline transition-all opacity-80 hover:opacity-100" href="#">Data Processing Agreement</a>
+</div>
+</footer>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('.active\\:scale-95').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.95)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simple tab handling or search focus effects
+        const searchInput = document.querySelector('input[type="text"]');
+        if(searchInput) {
+            searchInput.addEventListener('focus', () => {
+                searchInput.classList.add('w-80');
+            });
+            searchInput.addEventListener('blur', () => {
+                searchInput.classList.remove('w-80');
+            });
+        }
+    </script>
+</body></html>

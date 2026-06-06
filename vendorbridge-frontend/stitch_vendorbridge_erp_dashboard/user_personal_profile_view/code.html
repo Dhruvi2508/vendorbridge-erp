@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VendorBridge - Executive Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-primary-container": "#6b5500",
+                "surface-dim": "#dadada",
+                "on-secondary-fixed": "#2b1700",
+                "outline": "#7f7663",
+                "on-primary-fixed": "#241a00",
+                "primary-container": "#f3ca4a",
+                "on-surface": "#1a1c1c",
+                "outline-variant": "#d0c5af",
+                "inverse-surface": "#2f3131",
+                "tertiary": "#5f5e5e",
+                "tertiary-fixed": "#e4e2e2",
+                "surface-container": "#efeeed",
+                "on-tertiary-container": "#585857",
+                "primary": "#745b00",
+                "surface-container-high": "#e9e8e8",
+                "on-tertiary-fixed": "#1b1c1c",
+                "on-secondary-fixed-variant": "#663e00",
+                "surface-container-low": "#f4f3f3",
+                "primary-fixed": "#ffe08a",
+                "primary-fixed-dim": "#ebc243",
+                "on-tertiary-fixed-variant": "#474747",
+                "on-secondary": "#ffffff",
+                "on-background": "#1a1c1c",
+                "on-secondary-container": "#784a03",
+                "secondary-fixed-dim": "#faba6e",
+                "on-tertiary": "#ffffff",
+                "on-error-container": "#93000a",
+                "secondary-container": "#fdbd70",
+                "on-primary-fixed-variant": "#574400",
+                "inverse-on-surface": "#f1f0f0",
+                "tertiary-container": "#d0cece",
+                "on-error": "#ffffff",
+                "error": "#ba1a1a",
+                "surface": "#faf9f9",
+                "inverse-primary": "#ebc243",
+                "surface-container-highest": "#e3e2e2",
+                "surface-bright": "#faf9f9",
+                "surface-container-lowest": "#ffffff",
+                "secondary": "#84540f",
+                "on-surface-variant": "#4d4635",
+                "tertiary-fixed-dim": "#c8c6c6",
+                "surface-tint": "#745b00",
+                "on-primary": "#ffffff",
+                "error-container": "#ffdad6",
+                "secondary-fixed": "#ffddb9",
+                "surface-variant": "#e3e2e2",
+                "background": "#faf9f9"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "xs": "4px",
+                "xl": "32px",
+                "lg": "24px",
+                "gutter": "24px",
+                "sm": "8px",
+                "md": "16px",
+                "container-margin": "32px",
+                "base": "4px",
+                "2xl": "48px"
+            },
+            "fontFamily": {
+                "headline-lg": ["Hanken Grotesk"],
+                "headline-md": ["Hanken Grotesk"],
+                "headline-sm": ["Hanken Grotesk"],
+                "label-md": ["JetBrains Mono"],
+                "label-sm": ["JetBrains Mono"],
+                "body-lg": ["Hanken Grotesk"],
+                "body-md": ["Hanken Grotesk"],
+                "body-sm": ["Hanken Grotesk"],
+            },
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d0c5af; border-radius: 10px; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(127, 118, 99, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopNavBar Shell -->
+<header class="bg-surface sticky top-0 z-40 shadow-sm border-b border-outline-variant flex justify-between items-center w-full px-lg h-16">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-primary">VendorBridge</span>
+<div class="hidden md:flex ml-lg gap-md">
+<a class="font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors px-sm py-xs rounded-lg cursor-pointer active:scale-95" href="#">Global Support</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors px-sm py-xs rounded-lg cursor-pointer active:scale-95" href="#">Analytics</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex gap-xs">
+<button class="p-xs text-primary hover:bg-surface-container-low rounded-full transition-colors material-symbols-outlined">notifications</button>
+<button class="p-xs text-primary hover:bg-surface-container-low rounded-full transition-colors material-symbols-outlined">chat_bubble</button>
+<button class="p-xs text-primary hover:bg-surface-container-low rounded-full transition-colors material-symbols-outlined">settings</button>
+</div>
+<img alt="Executive User Profile" class="w-10 h-10 rounded-full border-2 border-primary-fixed object-cover" data-alt="A professional headshot of a senior corporate executive in his late 40s, wearing a charcoal grey tailored suit and a crisp white shirt. The background is a blurred high-end office setting with soft, natural morning light coming through a window. The aesthetic is clean and modern, following a professional corporate photography style with a shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCf9-SsQqDLAnoRveEwKGnx4UcEcS-YIMeIqDjdHDNQpMLWE7GKJ8yiMNg-PbR9h6PmeqgYiezQbiQcGY7u7VX4WyiNgp_NEHhVjCOMbnEJkXFlt1yGTXX3CZKgsIDnkYsxFglXiorhQwymnYA-gCSCnZkOA223qhdtH1G1CiBXer513cqD1xVeG0FT6-gsNt3TwvvCvlwT3BANVdqe33xYoHF-GjgrbpSsWk4n-5-hzQIh15JtrA04QQ0wi5laaRriL-YebPwbFs0S"/>
+</div>
+</header>
+<div class="flex min-h-[calc(100vh-64px)]">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-[280px] z-50 bg-surface-container border-r border-outline-variant flex flex-col p-md gap-sm">
+<nav class="flex-grow space-y-1">
+<div class="px-sm py-xs mb-md">
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">VendorBridge</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">Enterprise Procurement</p>
+</div>
+<!-- Navigation Items -->
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-md">Vendors</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined">request_quote</span>
+<span class="font-label-md">RFQs</span>
+</a>
+<!-- ... other items ... -->
+<a class="flex items-center gap-md px-md py-sm bg-primary-container text-on-primary-container font-bold rounded-lg shadow-sm" href="#">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md">Account Settings</span>
+</a>
+</nav>
+<button class="bg-primary text-on-primary font-bold py-md px-lg rounded-lg shadow-sm active:scale-95 transition-all flex items-center justify-center gap-sm mt-md">
+<span class="material-symbols-outlined">add_circle</span>
+                New Procurement Request
+            </button>
+<div class="mt-xl pt-md border-t border-outline-variant">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Help Center</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] w-full p-xl bg-[#F3F6F4] min-h-full">
+<div class="max-w-5xl mx-auto space-y-xl">
+<!-- Profile Header Card (Bento Style) -->
+<section class="grid grid-cols-12 gap-lg">
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl p-xl shadow-[0px_4px_12px_rgba(0,0,0,0.03)] border border-outline-variant flex flex-col md:flex-row gap-xl items-center relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container opacity-10 rounded-bl-full"></div>
+<!-- Avatar Section -->
+<div class="relative group cursor-pointer">
+<img alt="Profile Avatar" class="w-32 h-32 rounded-2xl object-cover ring-4 ring-primary-fixed shadow-md" data-alt="Close-up portrait of a corporate professional male in his late 40s. He has short-cropped hair and is wearing a dark charcoal suit with a crisp white shirt. The background is a minimalist, modern office interior with subtle gold and grey accents. The lighting is soft and directional, highlighting facial features while maintaining a professional executive atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATuZts6tJkLw9HP3nVBwQAFx16nkPtiYGFVOSEBAzXZtYkJXjBAoyIRODfP6AOe_mI_IyWMNbg6kDv9qyszUN5D45nx84WcjsYQYvbardfs6gymO1_dP9xNF8keaC0nlI-nu2WWnZHsrfHGwJBebIfjhaweDFxQYKTfN_opsTj-vgMOyIIzNiKxZTk_1vyvGPltvNF-xOSnai-r0wpVz9HwR8DuuTiQ3a2b9S9x_ZQNuF7L4CTr9m5SDYzLsCaB9IOe_1wAPvS7uLD"/>
+<div class="absolute inset-0 bg-black/40 rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-surface">photo_camera</span>
+</div>
+</div>
+<!-- Info Section -->
+<div class="flex-grow text-center md:text-left space-y-sm">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Adrian Thorne</h1>
+<p class="font-body-lg text-body-lg text-secondary font-medium">Chief Procurement Officer</p>
+</div>
+<div class="flex flex-wrap gap-sm justify-center md:justify-start">
+<span class="px-sm py-xs bg-surface-container-high rounded-lg font-label-sm text-on-tertiary-container flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">corporate_fare</span>
+                                    Global Supply Chain
+                                </span>
+<span class="px-sm py-xs bg-primary-container/20 rounded-lg font-label-sm text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                    Verified Executive
+                                </span>
+</div>
+</div>
+<div class="flex flex-col gap-sm">
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-bold shadow-sm active:scale-95 transition-all text-sm">Edit Profile</button>
+<button class="bg-transparent border border-outline text-on-surface-variant px-lg py-sm rounded-lg font-bold hover:bg-surface-container transition-all text-sm">Download Resume</button>
+</div>
+</div>
+<!-- Status Card -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-lowest rounded-xl p-xl shadow-[0px_4px_12px_rgba(0,0,0,0.03)] border border-outline-variant flex flex-col justify-between">
+<div class="space-y-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Account Status</h3>
+<div class="p-md bg-green-50 rounded-lg border border-green-100 flex items-center gap-md">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="font-body-sm font-medium text-green-700">Active - High Clearance</span>
+</div>
+</div>
+<div class="mt-md pt-md border-t border-outline-variant space-y-xs">
+<div class="flex justify-between font-label-sm text-on-surface-variant">
+<span>Security Score</span>
+<span class="text-primary font-bold">94%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full w-[94%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Tabbed Settings Section -->
+<div class="w-full">
+<!-- Tabs -->
+<div class="flex gap-lg border-b border-outline-variant mb-xl">
+<button class="pb-md font-bold text-primary border-b-2 border-primary flex items-center gap-sm">
+<span class="material-symbols-outlined">person</span>
+                            Personal Information
+                        </button>
+<button class="pb-md font-medium text-on-surface-variant hover:text-on-surface flex items-center gap-sm transition-colors">
+<span class="material-symbols-outlined">security</span>
+                            Security &amp; Access
+                        </button>
+<button class="pb-md font-medium text-on-surface-variant hover:text-on-surface flex items-center gap-sm transition-colors">
+<span class="material-symbols-outlined">notifications_active</span>
+                            Preferences
+                        </button>
+</div>
+<div class="grid grid-cols-12 gap-xl">
+<!-- Left Column: Details -->
+<div class="col-span-12 md:col-span-7 space-y-lg">
+<div class="bg-surface-container-lowest rounded-xl p-xl shadow-[0px_4px_12px_rgba(0,0,0,0.03)] border border-outline-variant">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">contact_mail</span>
+                                    Contact Details
+                                </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xl">
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant">FULL NAME</label>
+<input class="w-full p-md bg-surface-container-low border border-outline-variant rounded-lg font-body-md focus:ring-2 focus:ring-primary-fixed focus:border-secondary outline-none transition-all" type="text" value="Adrian Thorne"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant">WORK EMAIL</label>
+<input class="w-full p-md bg-surface-container-low border border-outline-variant rounded-lg font-body-md focus:ring-2 focus:ring-primary-fixed focus:border-secondary outline-none transition-all" type="email" value="a.thorne@vendorbridge.com"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant">PHONE NUMBER</label>
+<input class="w-full p-md bg-surface-container-low border border-outline-variant rounded-lg font-body-md focus:ring-2 focus:ring-primary-fixed focus:border-secondary outline-none transition-all" type="tel" value="+1 (555) 012-3456"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant">TIMEZONE</label>
+<select class="w-full p-md bg-surface-container-low border border-outline-variant rounded-lg font-body-md focus:ring-2 focus:ring-primary-fixed focus:border-secondary outline-none transition-all">
+<option>Eastern Standard Time (GMT-5)</option>
+<option>Pacific Standard Time (GMT-8)</option>
+<option>Central European Time (GMT+1)</option>
+</select>
+</div>
+</div>
+<div class="mt-xl flex justify-end">
+<button class="bg-primary text-on-primary px-xl py-md rounded-lg font-bold shadow-sm hover:scale-[1.02] active:scale-95 transition-all">Save Changes</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-xl shadow-[0px_4px_12px_rgba(0,0,0,0.03)] border border-outline-variant">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">shield</span>
+                                    Security Section
+                                </h2>
+<div class="space-y-lg">
+<div class="flex items-center justify-between p-md bg-surface-container-low rounded-lg border border-outline-variant">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">password</span>
+</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">Password</p>
+<p class="font-body-sm text-on-surface-variant">Last updated 14 days ago</p>
+</div>
+</div>
+<button class="text-secondary font-bold font-label-sm hover:underline">RESET</button>
+</div>
+<div class="flex items-center justify-between p-md bg-surface-container-low rounded-lg border border-outline-variant">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">key</span>
+</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">Two-Factor Authentication (2FA)</p>
+<p class="font-body-sm text-on-surface-variant">Enabled via Authenticator App</p>
+</div>
+</div>
+<button class="text-error font-bold font-label-sm hover:underline">DISABLE</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Micro-stats & History -->
+<div class="col-span-12 md:col-span-5 space-y-lg">
+<div class="bg-surface-container-lowest rounded-xl p-xl shadow-[0px_4px_12px_rgba(0,0,0,0.03)] border border-outline-variant">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-md">Connected Apps</h2>
+<div class="space-y-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 bg-blue-100 rounded flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined text-[20px]">cloud</span>
+</div>
+<span class="font-body-md">Oracle ERP Cloud</span>
+</div>
+<span class="px-xs py-[2px] bg-green-100 text-green-700 text-[10px] rounded font-bold">LINKED</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 bg-yellow-100 rounded flex items-center justify-center text-yellow-600">
+<span class="material-symbols-outlined text-[20px]">database</span>
+</div>
+<span class="font-body-md">SAP Ariba Hub</span>
+</div>
+<span class="px-xs py-[2px] bg-green-100 text-green-700 text-[10px] rounded font-bold">LINKED</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 bg-red-100 rounded flex items-center justify-center text-red-600">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</div>
+<span class="font-body-md">Slack Workspace</span>
+</div>
+<span class="px-xs py-[2px] bg-surface-container-high text-on-surface-variant text-[10px] rounded font-bold">OFFLINE</span>
+</div>
+</div>
+</div>
+<div class="bg-primary-container/10 rounded-xl p-xl border border-primary-fixed-dim">
+<h2 class="font-headline-sm text-headline-sm text-primary mb-md">Executive Session</h2>
+<p class="font-body-sm text-on-primary-container mb-lg">You are currently logged in from London, UK. Your session will expire in 18 minutes due to security policy.</p>
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-md rounded-lg shadow-sm hover:brightness-95 transition-all">Renew Session</button>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-xl shadow-[0px_4px_12px_rgba(0,0,0,0.03)] border border-outline-variant">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-md">Recent Activity</h2>
+<div class="space-y-md">
+<div class="flex gap-md">
+<div class="w-1 bg-primary-fixed-dim rounded-full"></div>
+<div>
+<p class="font-body-sm text-on-surface font-bold">Approved RFQ-2024-081</p>
+<p class="font-label-sm text-on-surface-variant text-[11px]">Today, 10:24 AM</p>
+</div>
+</div>
+<div class="flex gap-md">
+<div class="w-1 bg-outline-variant rounded-full"></div>
+<div>
+<p class="font-body-sm text-on-surface font-bold">Updated Vendor Profile: SteelCorp</p>
+<p class="font-label-sm text-on-surface-variant text-[11px]">Yesterday, 4:45 PM</p>
+</div>
+</div>
+<div class="flex gap-md">
+<div class="w-1 bg-outline-variant rounded-full"></div>
+<div>
+<p class="font-body-sm text-on-surface font-bold">System Login</p>
+<p class="font-label-sm text-on-surface-variant text-[11px]">Yesterday, 9:00 AM</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer Shell -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant flex justify-between items-center px-lg py-md ml-[280px]">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-primary">VendorBridge ERP</span>
+<p class="font-body-sm text-body-sm text-secondary">© 2024 VendorBridge ERP. All rights reserved.</p>
+</div>
+<div class="flex gap-lg">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors underline decoration-transparent hover:decoration-primary" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors underline decoration-transparent hover:decoration-primary" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors underline decoration-transparent hover:decoration-primary" href="#">Security Compliance</a>
+</div>
+</footer>
+<script>
+        // Micro-interaction: Profile image pulse on hover
+        const profileImg = document.querySelector('img[alt="Profile Avatar"]');
+        if (profileImg) {
+            profileImg.addEventListener('mouseenter', () => {
+                profileImg.style.transform = 'scale(1.02) rotate(1deg)';
+            });
+            profileImg.addEventListener('mouseleave', () => {
+                profileImg.style.transform = 'scale(1) rotate(0deg)';
+            });
+        }
+
+        // Ripple-like effect for primary buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                let ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.background = 'rgba(255,255,255,0.3)';
+                ripple.style.width = '100px';
+                ripple.style.height = '100px';
+                ripple.style.borderRadius = '50%';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.transform = 'translate(-50%, -50%) scale(0)';
+                ripple.style.left = e.offsetX + 'px';
+                ripple.style.top = e.offsetY + 'px';
+                ripple.classList.add('animate-ripple');
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+    </script>
+<style>
+        @keyframes ripple {
+            to { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+        }
+        .animate-ripple { animation: ripple 0.6s linear; }
+    </style>
+</body></html>

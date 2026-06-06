@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quotation Details | VendorBridge</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#6b5500",
+                    "surface-dim": "#dadada",
+                    "on-secondary-fixed": "#2b1700",
+                    "outline": "#7f7663",
+                    "on-primary-fixed": "#241a00",
+                    "primary-container": "#f3ca4a",
+                    "on-surface": "#1a1c1c",
+                    "outline-variant": "#d0c5af",
+                    "inverse-surface": "#2f3131",
+                    "tertiary": "#5f5e5e",
+                    "tertiary-fixed": "#e4e2e2",
+                    "surface-container": "#efeeed",
+                    "on-tertiary-container": "#585857",
+                    "primary": "#745b00",
+                    "surface-container-high": "#e9e8e8",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "on-secondary-fixed-variant": "#663e00",
+                    "surface-container-low": "#f4f3f3",
+                    "primary-fixed": "#ffe08a",
+                    "primary-fixed-dim": "#ebc243",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "on-secondary-container": "#784a03",
+                    "secondary-fixed-dim": "#faba6e",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#fdbd70",
+                    "on-primary-fixed-variant": "#574400",
+                    "inverse-on-surface": "#f1f0f0",
+                    "tertiary-container": "#d0cece",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface": "#faf9f9",
+                    "inverse-primary": "#ebc243",
+                    "surface-container-highest": "#e3e2e2",
+                    "surface-bright": "#faf9f9",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#84540f",
+                    "on-surface-variant": "#4d4635",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "surface-tint": "#745b00",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#ffddb9",
+                    "surface-variant": "#e3e2e2",
+                    "background": "#faf9f9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "xl": "32px",
+                    "lg": "24px",
+                    "gutter": "24px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "container-margin": "32px",
+                    "base": "4px",
+                    "2xl": "48px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-xl": ["Hanken Grotesk"],
+                    "label-md": ["JetBrains Mono"],
+                    "body-md": ["Hanken Grotesk"],
+                    "body-sm": ["Hanken Grotesk"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-sm": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["13px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Hanken Grotesk', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d0c5af; border-radius: 10px; }
+        .card-shadow { box-shadow: 0px 4px 12px rgba(0,0,0,0.03); }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- SideNavBar Anchor -->
+<aside class="fixed left-0 top-0 h-full w-[280px] z-50 bg-surface-container border-r border-outline-variant flex flex-col p-md gap-sm transition-all duration-200 ease-in-out">
+<div class="flex items-center gap-md px-sm mb-lg">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-on-surface">VendorBridge</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Enterprise Procurement</p>
+</div>
+</div>
+<nav class="flex-1 space-y-xs overflow-y-auto">
+<a class="flex items-center gap-md p-md font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-md p-md font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">storefront</span> Vendors
+            </a>
+<a class="flex items-center gap-md p-md font-label-md text-label-md bg-primary-container text-on-primary-container font-bold rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">request_quote</span> RFQs
+            </a>
+<a class="flex items-center gap-md p-md font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">description</span> Contracts
+            </a>
+<a class="flex items-center gap-md p-md font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">shopping_cart</span> Purchase Orders
+            </a>
+<a class="flex items-center gap-md p-md font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">receipt_long</span> Invoices
+            </a>
+<div class="pt-md pb-xs border-t border-outline-variant mx-sm mt-md">
+<p class="text-[10px] uppercase font-bold text-outline tracking-widest px-sm">Administration</p>
+</div>
+<a class="flex items-center gap-md p-md font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">verified_user</span> Compliance
+            </a>
+<a class="flex items-center gap-md p-md font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">assessment</span> Reports
+            </a>
+</nav>
+<div class="mt-auto space-y-xs">
+<a class="flex items-center gap-md p-md font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span> Help Center
+            </a>
+<a class="flex items-center gap-md p-md font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">manage_accounts</span> Account Settings
+            </a>
+</div>
+</aside>
+<main class="ml-[280px] min-h-screen flex flex-col">
+<!-- TopNavBar Anchor -->
+<header class="sticky top-0 z-40 w-full h-16 bg-surface border-b border-outline-variant flex justify-between items-center px-lg shadow-sm">
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-sm bg-surface-container-low px-md py-xs rounded-lg border border-outline-variant">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 font-body-sm text-body-sm w-64 text-on-surface" placeholder="Search RFQs, Vendors..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-sm px-md py-xs">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors">chat_bubble</span>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors">settings</span>
+</div>
+<div class="h-8 w-px bg-outline-variant mx-sm"></div>
+<div class="flex items-center gap-md">
+<div class="text-right hidden xl:block">
+<p class="font-label-md text-label-md text-on-surface font-bold">Alex Sterling</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Procurement Director</p>
+</div>
+<img alt="Executive User Profile" class="w-10 h-10 rounded-full border border-outline-variant bg-surface-container-high" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2PPF9jHuQufCNpSZlG56bQcWH49manp-KXi_clnqyQM7VZlC6UCRz6K9fS-7iKLnxikvS0t6PjG184q3WVSeDYEcoWms3kz0L7aGL6ccZaXLU1Eh0ydr5NNqRGjZSdFIk-bFGllw_cnUpETrQFL6MkH3ZOgwwMdLnleZFgFO5OHwwCeDC19XTccH2RIFOn_zzY2Wm3XigZEmcozN9RDRH5JA2r_AnkOdqU7vLrE8_EtjiG_NWsgjQtKRzWaQLmGgBo79LVif7pWaZ"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-lg flex-1">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-lg mb-xl">
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<span class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-sm py-[2px] rounded uppercase tracking-wider">Pending Review</span>
+<span class="text-on-surface-variant text-body-sm">•</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">RFQ-2024-0892</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Precision Steel Fabrication Bid</h2>
+<p class="text-on-surface-variant font-body-md text-body-md mt-xs">Submitted by <span class="text-primary font-bold">IronWorks Industrial Ltd.</span> on Oct 24, 2024</p>
+</div>
+<div class="flex items-center gap-md">
+<button class="flex items-center gap-sm border border-error text-error px-lg py-md rounded-lg font-label-md text-label-md hover:bg-error hover:text-on-error transition-all active:scale-95">
+<span class="material-symbols-outlined">close</span> REJECT BID
+                    </button>
+<button class="flex items-center gap-sm bg-primary text-on-primary px-lg py-md rounded-lg font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-all shadow-md active:scale-95" style="border-bottom: 2px solid #574400">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span> APPROVE QUOTATION
+                    </button>
+</div>
+</div>
+<!-- Dashboard Layout (Bento Grid Style) -->
+<div class="grid grid-cols-12 gap-lg">
+<!-- Main Details Card -->
+<div class="col-span-12 lg:col-span-8 space-y-lg">
+<!-- Line Items Table -->
+<div class="bg-surface rounded-xl border border-outline-variant overflow-hidden card-shadow">
+<div class="p-md bg-surface-container-low border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-label-md text-label-md font-bold text-on-surface uppercase tracking-wider">Line Items breakdown</h3>
+<button class="text-primary text-label-sm font-bold flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">download</span> EXPORT CSV
+                            </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-highest border-b border-outline-variant">
+<th class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase">Description</th>
+<th class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase text-right">Quantity</th>
+<th class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase text-right">Unit Price</th>
+<th class="p-md font-label-sm text-label-sm text-on-surface-variant uppercase text-right">Total</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-surface">
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="p-md">
+<div class="font-bold">Structural Grade Steel H-Beam</div>
+<div class="text-on-surface-variant text-[12px]">300mm x 300mm, Grade S355JR, 12m lengths</div>
+</td>
+<td class="p-md text-right font-label-md">24 Units</td>
+<td class="p-md text-right font-label-md">$1,120.00</td>
+<td class="p-md text-right font-label-md font-bold">$26,880.00</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="p-md">
+<div class="font-bold">Reinforced Concrete Anchor Bolts</div>
+<div class="text-on-surface-variant text-[12px]">M24 x 450mm, Galvanized Finish</div>
+</td>
+<td class="p-md text-right font-label-md">150 Units</td>
+<td class="p-md text-right font-label-md">$14.50</td>
+<td class="p-md text-right font-label-md font-bold">$2,175.00</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="p-md">
+<div class="font-bold">Custom Plate Cutting Services</div>
+<div class="text-on-surface-variant text-[12px]">Precision laser cutting for base plates</div>
+</td>
+<td class="p-md text-right font-label-md">1 Lot</td>
+<td class="p-md text-right font-label-md">$4,200.00</td>
+<td class="p-md text-right font-label-md font-bold">$4,200.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-lg bg-surface-container-lowest grid grid-cols-12 border-t border-outline-variant">
+<div class="col-span-12 md:col-span-7">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-xs">Vendor Notes</p>
+<p class="text-body-sm text-on-surface-variant italic">"All steel pricing is indexed to the LME monthly average. Quote is valid for 15 calendar days from submission. Lead time is estimated at 3-4 weeks post-PO receipt."</p>
+</div>
+<div class="col-span-12 md:col-span-5 mt-lg md:mt-0 space-y-sm">
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Subtotal</span>
+<span class="font-label-md font-bold">$33,255.00</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Tax (VAT 15%)</span>
+<span class="font-label-md font-bold">$4,988.25</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Logistic Fees</span>
+<span class="font-label-md font-bold">$850.00</span>
+</div>
+<div class="pt-sm border-t border-outline-variant flex justify-between">
+<span class="font-label-md text-label-md font-bold uppercase">Total Bid Amount</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">$39,093.25</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Attachment Preview -->
+<div class="bg-surface rounded-xl border border-outline-variant p-md card-shadow">
+<h3 class="font-label-md text-label-md font-bold text-on-surface uppercase tracking-wider mb-md">Technical Attachments</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-md">
+<div class="group relative aspect-video rounded-lg overflow-hidden border border-outline-variant bg-surface-container-high cursor-pointer">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A detailed technical blueprint of a steel fabrication component showing precise CAD measurements and engineering diagrams. The image is clean and professional, using a minimalist corporate style with crisp white lines against a technical gray background to convey architectural precision and high-end industrial design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRRIH7gWERhEB3lgDzHZzBvHVKQnHTQS1mV9oNW1Xngt25Ioa6LBGiuSiF_sMH2A7hoQMZVfdaYCyeCXq160k6CCtF1oBFvMrDQm2q61PFznf4os6TfPLXzBkFMZvqwf8BeM_Ki3VXAP5CH-CBCVaH13dNCO-s3DmnQwMc_GlyicHV10JwpijSjyOFuw--C5q6-gWmdqFcIs1k3OPDsjnh6FF-eKjtXk6sbYrSEvX97bR0lOikYqAauWouVOpysPxnc53En2H-3gwm"/>
+<div class="absolute bottom-0 left-0 right-0 p-xs bg-black/60 backdrop-blur-sm">
+<p class="text-white text-[10px] truncate font-label-md">spec_sheet_v2.pdf</p>
+</div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-3xl">visibility</span>
+</div>
+</div>
+<div class="group relative aspect-video rounded-lg overflow-hidden border border-outline-variant bg-surface-container-high cursor-pointer">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A high-resolution photograph of a modern industrial warehouse facility featuring heavy machinery and organized steel inventory. The lighting is bright and natural, coming from high industrial windows, creating a clean and efficient professional atmosphere. The color palette is dominated by industrial grays and metallic surfaces with vibrant yellow safety accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF1UE3tfXK1sE34sG3f83fdw1sfi6tt0HxflLMojZP6EEDBNyy3Par-7aHzeZNqWqLuVyCqIiwWLsThAby-pCoPqahR0DpMAMo_SRvzwD4ORUMttyZH9_9Cqf5y3b3-_QSR_iUBdZms2sSx9clLA6UpmTQokgooWTzOlpndjoPJwVxuTYLrVu4jQlayXKC_B9iyORC4n_reH0v7kFdLfUn8NwflUWiHjMAs2tCYJxcifqKMSTdX0pLHyGVh1muhDBA7KH_ddcSD3qE"/>
+<div class="absolute bottom-0 left-0 right-0 p-xs bg-black/60 backdrop-blur-sm">
+<p class="text-white text-[10px] truncate font-label-md">factory_cert.jpg</p>
+</div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-3xl">visibility</span>
+</div>
+</div>
+<div class="border-2 border-dashed border-outline-variant rounded-lg flex flex-col items-center justify-center p-md bg-surface-container-low hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-outline mb-xs">add_circle</span>
+<p class="text-[10px] font-label-md text-on-surface-variant">ADD INTERNAL NOTES</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Content -->
+<div class="col-span-12 lg:col-span-4 space-y-lg">
+<!-- Vendor Compliance Check -->
+<div class="bg-surface rounded-xl border border-outline-variant p-lg card-shadow">
+<div class="flex items-center justify-between mb-lg">
+<h3 class="font-label-md text-label-md font-bold text-on-surface uppercase">Compliance Check</h3>
+<span class="flex items-center gap-xs text-[#2e7d32] bg-[#e8f5e9] px-sm py-1 rounded-full text-[10px] font-bold">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span> VERIFIED
+                            </span>
+</div>
+<ul class="space-y-md">
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-[#2e7d32] mt-xs">check_circle</span>
+<div>
+<p class="font-body-sm text-body-sm font-bold text-on-surface">ISO 9001:2015</p>
+<p class="text-on-surface-variant text-[12px]">Quality management system active. Exp: 12/2025</p>
+</div>
+</li>
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-[#2e7d32] mt-xs">check_circle</span>
+<div>
+<p class="font-body-sm text-body-sm font-bold text-on-surface">Financial Stability</p>
+<p class="text-on-surface-variant text-[12px]">Dun &amp; Bradstreet Rating: 1A2 (Low Risk)</p>
+</div>
+</li>
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-secondary mt-xs">info</span>
+<div>
+<p class="font-body-sm text-body-sm font-bold text-on-surface">Insurance Certificate</p>
+<p class="text-on-surface-variant text-[12px]">GL Insurance $5M. Updates required in 45 days.</p>
+</div>
+</li>
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-[#2e7d32] mt-xs">check_circle</span>
+<div>
+<p class="font-body-sm text-body-sm font-bold text-on-surface">B-BBEE Level 4</p>
+<p class="text-on-surface-variant text-[12px]">Contributor status verified.</p>
+</div>
+</li>
+</ul>
+<button class="w-full mt-xl py-md border border-outline-variant text-on-surface-variant rounded-lg font-label-md text-label-md hover:bg-surface-container-high transition-all">
+                            VIEW FULL COMPLIANCE REPORT
+                        </button>
+</div>
+<!-- Vendor Quick Stats -->
+<div class="bg-primary-container/10 rounded-xl border border-primary/20 p-lg card-shadow">
+<h3 class="font-label-md text-label-md font-bold text-on-surface uppercase mb-md">Performance Pulse</h3>
+<div class="space-y-md">
+<div>
+<div class="flex justify-between mb-xs">
+<span class="text-body-sm text-on-surface">Delivery Reliability</span>
+<span class="font-bold text-body-sm">94%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 94%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-xs">
+<span class="text-body-sm text-on-surface">Quality Pass Rate</span>
+<span class="font-bold text-body-sm">98.2%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 98.2%"></div>
+</div>
+</div>
+</div>
+<div class="mt-lg pt-md border-t border-primary/10 grid grid-cols-2 gap-md">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Active Contracts</p>
+<p class="font-headline-sm text-headline-sm text-on-surface">04</p>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Total Spend YTD</p>
+<p class="font-headline-sm text-headline-sm text-on-surface">$1.2M</p>
+</div>
+</div>
+</div>
+<!-- Timeline -->
+<div class="bg-surface rounded-xl border border-outline-variant p-lg card-shadow">
+<h3 class="font-label-md text-label-md font-bold text-on-surface uppercase mb-lg">RFQ Activity Log</h3>
+<div class="relative pl-lg border-l border-outline-variant space-y-lg">
+<div class="relative">
+<div class="absolute -left-[30px] top-1 w-3 h-3 rounded-full bg-primary ring-4 ring-white"></div>
+<p class="font-label-sm text-label-sm text-on-surface font-bold">Bid Received</p>
+<p class="text-[11px] text-on-surface-variant italic">24 Oct, 09:12 AM</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[30px] top-1 w-3 h-3 rounded-full bg-outline ring-4 ring-white"></div>
+<p class="font-label-sm text-label-sm text-on-surface font-bold">Vendor Clarification Requested</p>
+<p class="text-[11px] text-on-surface-variant italic">22 Oct, 03:45 PM</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[30px] top-1 w-3 h-3 rounded-full bg-outline ring-4 ring-white"></div>
+<p class="font-label-sm text-label-sm text-on-surface font-bold">RFQ Published</p>
+<p class="text-[11px] text-on-surface-variant italic">18 Oct, 10:00 AM</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Anchor -->
+<footer class="w-full bg-surface-container-lowest border-t border-outline-variant flex justify-between items-center px-lg py-md ml-0">
+<div class="flex items-center gap-md">
+<span class="font-label-md text-label-md font-bold text-primary">VendorBridge ERP</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">© 2024. All rights reserved.</span>
+</div>
+<div class="flex gap-lg">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">Security Compliance</a>
+</div>
+</footer>
+</main>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('mousedown', () => el.classList.add('scale-95'));
+            el.addEventListener('mouseup', () => el.classList.remove('scale-95'));
+            el.addEventListener('mouseleave', () => el.classList.remove('scale-95'));
+        });
+
+        // Simulating approval flow
+        const approveBtn = document.querySelector('button.bg-primary');
+        if (approveBtn) {
+            approveBtn.addEventListener('click', () => {
+                const confirmed = confirm('Are you sure you want to approve this quotation from IronWorks Industrial Ltd?');
+                if (confirmed) {
+                    approveBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> PROCESSING...';
+                    approveBtn.classList.add('opacity-70', 'pointer-events-none');
+                    setTimeout(() => {
+                        alert('Quotation Approved. Purchase Order generated.');
+                        window.location.reload();
+                    }, 2000);
+                }
+            });
+        }
+    </script>
+</body></html>

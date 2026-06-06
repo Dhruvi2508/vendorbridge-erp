@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VendorBridge | Reports &amp; Analytics</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Chart.js (for visualization) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#6b5500",
+                    "surface-dim": "#dadada",
+                    "on-secondary-fixed": "#2b1700",
+                    "outline": "#7f7663",
+                    "on-primary-fixed": "#241a00",
+                    "primary-container": "#f3ca4a",
+                    "on-surface": "#1a1c1c",
+                    "outline-variant": "#d0c5af",
+                    "inverse-surface": "#2f3131",
+                    "tertiary": "#5f5e5e",
+                    "tertiary-fixed": "#e4e2e2",
+                    "surface-container": "#efeeed",
+                    "on-tertiary-container": "#585857",
+                    "primary": "#745b00",
+                    "surface-container-high": "#e9e8e8",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "on-secondary-fixed-variant": "#663e00",
+                    "surface-container-low": "#f4f3f3",
+                    "primary-fixed": "#ffe08a",
+                    "primary-fixed-dim": "#ebc243",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "on-secondary-container": "#784a03",
+                    "secondary-fixed-dim": "#faba6e",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#fdbd70",
+                    "on-primary-fixed-variant": "#574400",
+                    "inverse-on-surface": "#f1f0f0",
+                    "tertiary-container": "#d0cece",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface": "#faf9f9",
+                    "inverse-primary": "#ebc243",
+                    "surface-container-highest": "#e3e2e2",
+                    "surface-bright": "#faf9f9",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#84540f",
+                    "on-surface-variant": "#4d4635",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "surface-tint": "#745b00",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#ffddb9",
+                    "surface-variant": "#e3e2e2",
+                    "background": "#faf9f9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "xl": "32px",
+                    "lg": "24px",
+                    "gutter": "24px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "container-margin": "32px",
+                    "base": "4px",
+                    "2xl": "48px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-sm": ["Hanken Grotesk"],
+                    "headline-xl": ["Hanken Grotesk"],
+                    "label-md": ["JetBrains Mono"],
+                    "label-sm": ["JetBrains Mono"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "body-md": ["Hanken Grotesk"],
+                    "body-sm": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                    "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                    "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                    "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                    "label-md": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                    "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "500" }],
+                    "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                    "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                    "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .chart-container { position: relative; height: 300px; width: 100%; }
+      .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+      .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+      .custom-scrollbar::-webkit-scrollbar-thumb { background: #d0c5af; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden flex h-screen">
+<!-- Side Navigation Shell -->
+<aside class="fixed left-0 top-0 h-full w-[280px] z-50 bg-surface-container border-r border-outline-variant flex flex-col p-md gap-sm transition-all duration-200 ease-in-out">
+<div class="flex items-center gap-md mb-lg px-xs">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-on-surface">VendorBridge</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Enterprise Procurement</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-xs overflow-y-auto custom-scrollbar">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-md text-label-md">Vendors</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">request_quote</span>
+<span class="font-label-md text-label-md">RFQs</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Contracts</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-md text-label-md">Purchase Orders</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">Invoices</span>
+</a>
+<!-- Active Item: Reports -->
+<a class="flex items-center gap-md px-md py-sm bg-primary-container text-on-primary-container font-bold rounded-lg shadow-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assessment</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">Audit Logs</span>
+</a>
+</nav>
+<div class="mt-auto pt-md border-t border-outline-variant flex flex-col gap-xs">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md text-label-md">Account Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 ml-[280px] h-screen flex flex-col overflow-hidden bg-surface">
+<!-- Top Navigation Bar -->
+<header class="h-16 flex justify-between items-center w-full px-lg sticky top-0 z-40 bg-surface border-b border-outline-variant shadow-sm">
+<div class="flex items-center gap-lg">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant opacity-60">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-full py-sm pl-[44px] pr-md text-body-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Search analytics, reports, or KPIs..." type="text"/>
+</div>
+<div class="flex items-center gap-md">
+<span class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary cursor-pointer h-16 flex items-center px-sm">Analytics</span>
+<span class="font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer px-sm h-16 flex items-center">Global Support</span>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined text-primary">chat_bubble</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined text-primary">settings</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant mx-xs"></div>
+<div class="flex items-center gap-sm pl-xs">
+<img alt="Executive User Profile" class="w-10 h-10 rounded-full border border-primary/20 object-cover" data-alt="A professional headshot of a corporate executive in a modern, brightly lit office environment. The lighting is soft and high-key, reflecting a clean and sophisticated light-mode UI aesthetic. The background consists of blurred glass partitions and minimal architectural details, emphasizing a high-performance fintech atmosphere with a focus on leadership and clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7eABBUp4dTtTtcBonGNGisuxV3M1d8h5qVv8BnbGX_A7hg3AzG1Pu0NPy9ZFZ5iI8Vq4pBYp9bFj_CZsPzeFvNKqxeDl2gfMhj0qr4j_sryiTnAaXNDNCtb3PoEg8XpKPhA0IO88qDRAMrfGHkfGQX22rcKruMzQKe4vuxa6eUNM0o9BAStY57F-UiTXo4qsUZSXTEeU8PcmRlbtLLKV3ZzaFUgSs57Ujx2iaWuHDh0cpi9ICTY74VxEKSjEaxbJZlpEQyNn1dgmZ"/>
+<div class="hidden xl:block">
+<p class="font-label-md text-label-md font-bold text-on-surface">Alex Thompson</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">VP of Procurement</p>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-lg custom-scrollbar">
+<!-- Page Header / Actions -->
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Reports &amp; Insights</h2>
+<p class="text-on-surface-variant font-body-md">Comprehensive overview of procurement health and vendor efficiency.</p>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex bg-surface-container p-xs rounded-lg border border-outline-variant">
+<button class="px-md py-sm bg-white shadow-sm rounded-md text-label-sm font-bold text-primary">Q3 2024</button>
+<button class="px-md py-sm text-label-sm text-on-surface-variant hover:text-on-surface">Custom Range</button>
+</div>
+<button class="flex items-center gap-xs px-md py-[10px] bg-primary text-white rounded-lg font-label-md shadow-sm hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Export Data
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-lg">
+<!-- Summary Metrics (Level 1 Surface) -->
+<div class="col-span-12 lg:col-span-3 bg-white p-md rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(0,0,0,0.03)] flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="p-xs bg-primary-container/20 rounded-lg text-primary">
+<span class="material-symbols-outlined">payments</span>
+</span>
+<span class="text-label-sm text-green-600 font-bold flex items-center">+12.4%</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-widest">Total Quarterly Spend</p>
+<h3 class="font-headline-md text-headline-md mt-xs">$4.28M</h3>
+</div>
+<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-4/5"></div>
+</div>
+<p class="text-body-sm text-on-surface-variant opacity-70">80% of budget utilized</p>
+</div>
+<div class="col-span-12 lg:col-span-3 bg-white p-md rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(0,0,0,0.03)] flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="p-xs bg-secondary-container/20 rounded-lg text-secondary">
+<span class="material-symbols-outlined">groups</span>
+</span>
+<span class="text-label-sm text-on-surface-variant font-bold flex items-center">84 Active</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-widest">Onboarded Vendors</p>
+<h3 class="font-headline-md text-headline-md mt-xs">152</h3>
+</div>
+<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-1/2"></div>
+</div>
+<p class="text-body-sm text-on-surface-variant opacity-70">12 pending verification</p>
+</div>
+<div class="col-span-12 lg:col-span-3 bg-white p-md rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(0,0,0,0.03)] flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="p-xs bg-tertiary-container/20 rounded-lg text-tertiary">
+<span class="material-symbols-outlined">timer</span>
+</span>
+<span class="text-label-sm text-red-600 font-bold flex items-center">-2.1d</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-widest">Avg. Cycle Time</p>
+<h3 class="font-headline-md text-headline-md mt-xs">14.2 Days</h3>
+</div>
+<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-2/3"></div>
+</div>
+<p class="text-body-sm text-on-surface-variant opacity-70">Benchmark: 16.0 Days</p>
+</div>
+<div class="col-span-12 lg:col-span-3 bg-white p-md rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(0,0,0,0.03)] flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="p-xs bg-primary-container/20 rounded-lg text-primary">
+<span class="material-symbols-outlined">verified</span>
+</span>
+<span class="text-label-sm text-green-600 font-bold flex items-center">Excellent</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-widest">Compliance Rating</p>
+<h3 class="font-headline-md text-headline-md mt-xs">98.4%</h3>
+</div>
+<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[98%]"></div>
+</div>
+<p class="text-body-sm text-on-surface-variant opacity-70">Top 5% of industry peers</p>
+</div>
+<!-- Monthly Spend Line Graph (Primary Chart) -->
+<div class="col-span-12 lg:col-span-8 bg-white p-lg rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-center mb-lg">
+<div class="flex items-center gap-sm">
+<h3 class="font-headline-sm text-headline-sm">Monthly Procurement Spend</h3>
+<span class="material-symbols-outlined text-on-surface-variant opacity-40 cursor-help" title="Historical spend analysis across all categories">info</span>
+</div>
+<div class="flex gap-xs">
+<button class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-surface-container text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+<div class="chart-container">
+<canvas id="monthlySpendChart"></canvas>
+</div>
+</div>
+<!-- Category Spend Pie Chart -->
+<div class="col-span-12 lg:col-span-4 bg-white p-lg rounded-xl border border-outline-variant shadow-sm">
+<h3 class="font-headline-sm text-headline-sm mb-lg">Category Distribution</h3>
+<div class="chart-container flex items-center justify-center">
+<canvas id="categoryPieChart"></canvas>
+</div>
+<div class="mt-md space-y-sm">
+<div class="flex justify-between items-center text-body-sm">
+<div class="flex items-center gap-xs"><div class="w-2 h-2 rounded-full bg-[#745b00]"></div> Raw Materials</div>
+<span class="font-bold">45%</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<div class="flex items-center gap-xs"><div class="w-2 h-2 rounded-full bg-[#f3ca4a]"></div> Logistics</div>
+<span class="font-bold">22%</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<div class="flex items-center gap-xs"><div class="w-2 h-2 rounded-full bg-[#84540f]"></div> IT &amp; Hardware</div>
+<span class="font-bold">18%</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<div class="flex items-center gap-xs"><div class="w-2 h-2 rounded-full bg-[#5f5e5e]"></div> Services</div>
+<span class="font-bold">15%</span>
+</div>
+</div>
+</div>
+<!-- Vendor Performance Bar Chart -->
+<div class="col-span-12 lg:col-span-7 bg-white p-lg rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-headline-sm text-headline-sm">Top Vendor Performance</h3>
+<div class="flex items-center gap-md">
+<select class="bg-surface-container border-none text-label-sm font-bold text-on-surface-variant rounded-lg focus:ring-primary">
+<option>Score: High to Low</option>
+<option>Volume: High to Low</option>
+</select>
+</div>
+</div>
+<div class="chart-container">
+<canvas id="vendorPerformanceChart"></canvas>
+</div>
+</div>
+<!-- Procurement Cycle Heatmap (Simulated with visual grid) -->
+<div class="col-span-12 lg:col-span-5 bg-white p-lg rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-headline-sm text-headline-sm">Cycle Time Heatmap</h3>
+<span class="text-label-sm text-on-surface-variant">Last 30 Days</span>
+</div>
+<div class="space-y-xs">
+<!-- Heatmap Grid -->
+<div class="grid grid-cols-7 gap-xs text-center mb-sm">
+<div class="text-[10px] text-on-surface-variant font-bold">MON</div>
+<div class="text-[10px] text-on-surface-variant font-bold">TUE</div>
+<div class="text-[10px] text-on-surface-variant font-bold">WED</div>
+<div class="text-[10px] text-on-surface-variant font-bold">THU</div>
+<div class="text-[10px] text-on-surface-variant font-bold">FRI</div>
+<div class="text-[10px] text-on-surface-variant font-bold">SAT</div>
+<div class="text-[10px] text-on-surface-variant font-bold">SUN</div>
+</div>
+<div class="grid grid-cols-7 gap-xs">
+<!-- Week 1 -->
+<div class="aspect-square bg-primary/20 rounded-sm" title="4.2 Days"></div>
+<div class="aspect-square bg-primary/10 rounded-sm"></div>
+<div class="aspect-square bg-primary/60 rounded-sm" title="12.5 Days"></div>
+<div class="aspect-square bg-primary/40 rounded-sm"></div>
+<div class="aspect-square bg-primary/5 rounded-sm"></div>
+<div class="aspect-square bg-surface-container rounded-sm"></div>
+<div class="aspect-square bg-surface-container rounded-sm"></div>
+<!-- Week 2 -->
+<div class="aspect-square bg-primary/30 rounded-sm"></div>
+<div class="aspect-square bg-primary/80 rounded-sm" title="18.1 Days"></div>
+<div class="aspect-square bg-primary/50 rounded-sm"></div>
+<div class="aspect-square bg-primary/20 rounded-sm"></div>
+<div class="aspect-square bg-primary/10 rounded-sm"></div>
+<div class="aspect-square bg-surface-container rounded-sm"></div>
+<div class="aspect-square bg-surface-container rounded-sm"></div>
+<!-- Week 3 -->
+<div class="aspect-square bg-primary/95 rounded-sm" title="24.0 Days - ALERT"></div>
+<div class="aspect-square bg-primary/60 rounded-sm"></div>
+<div class="aspect-square bg-primary/40 rounded-sm"></div>
+<div class="aspect-square bg-primary/30 rounded-sm"></div>
+<div class="aspect-square bg-primary/10 rounded-sm"></div>
+<div class="aspect-square bg-surface-container rounded-sm"></div>
+<div class="aspect-square bg-surface-container rounded-sm"></div>
+<!-- Week 4 -->
+<div class="aspect-square bg-primary/40 rounded-sm"></div>
+<div class="aspect-square bg-primary/20 rounded-sm"></div>
+<div class="aspect-square bg-primary/10 rounded-sm"></div>
+<div class="aspect-square bg-primary/5 rounded-sm"></div>
+<div class="aspect-square bg-primary/5 rounded-sm"></div>
+<div class="aspect-square bg-surface-container rounded-sm"></div>
+<div class="aspect-square bg-surface-container rounded-sm"></div>
+</div>
+</div>
+<div class="mt-lg pt-md border-t border-outline-variant flex justify-between items-center">
+<div class="flex gap-sm items-center">
+<span class="text-[10px] text-on-surface-variant uppercase font-bold">Delay Risk:</span>
+<div class="flex gap-xs items-center">
+<div class="w-2 h-2 rounded-full bg-primary/10"></div>
+<span class="text-xs text-on-surface-variant">Low</span>
+</div>
+<div class="flex gap-xs items-center">
+<div class="w-2 h-2 rounded-full bg-primary/95"></div>
+<span class="text-xs text-on-surface-variant">Critical</span>
+</div>
+</div>
+<button class="text-label-sm text-primary font-bold flex items-center gap-xs hover:underline transition-all">
+                            View Full Map <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Recent Reports Table -->
+<div class="mt-lg bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<div class="px-lg py-md border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<h3 class="font-headline-sm text-headline-sm">Generated Report History</h3>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">filter_list</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">refresh</span>
+</div>
+</div>
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-lg py-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Report Name</th>
+<th class="px-lg py-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Date Generated</th>
+<th class="px-lg py-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="px-lg py-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Format</th>
+<th class="px-lg py-sm font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary">picture_as_pdf</span>
+<span class="font-body-md font-bold">Vendor Performance Audit Q3</span>
+</div>
+</td>
+<td class="px-lg py-md text-on-surface-variant">Sep 28, 2024 • 14:32</td>
+<td class="px-lg py-md">
+<span class="px-sm py-xs bg-green-100 text-green-800 text-[11px] font-bold rounded-full uppercase">Completed</span>
+</td>
+<td class="px-lg py-md text-on-surface-variant font-label-sm">PDF (12.4 MB)</td>
+<td class="px-lg py-md text-right">
+<button class="p-xs hover:text-primary transition-colors"><span class="material-symbols-outlined">download</span></button>
+<button class="p-xs hover:text-primary transition-colors ml-sm"><span class="material-symbols-outlined">share</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary">table_chart</span>
+<span class="font-body-md font-bold">Category Spend Breakdown Detailed</span>
+</div>
+</td>
+<td class="px-lg py-md text-on-surface-variant">Sep 27, 2024 • 09:15</td>
+<td class="px-lg py-md">
+<span class="px-sm py-xs bg-green-100 text-green-800 text-[11px] font-bold rounded-full uppercase">Completed</span>
+</td>
+<td class="px-lg py-md text-on-surface-variant font-label-sm">XLSX (4.8 MB)</td>
+<td class="px-lg py-md text-right">
+<button class="p-xs hover:text-primary transition-colors"><span class="material-symbols-outlined">download</span></button>
+<button class="p-xs hover:text-primary transition-colors ml-sm"><span class="material-symbols-outlined">share</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary">history</span>
+<span class="font-body-md font-bold">Procurement Cycle Bottlenecks</span>
+</div>
+</td>
+<td class="px-lg py-md text-on-surface-variant">Sep 26, 2024 • 11:20</td>
+<td class="px-lg py-md">
+<span class="px-sm py-xs bg-primary-container text-on-primary-container text-[11px] font-bold rounded-full uppercase">Processing</span>
+</td>
+<td class="px-lg py-md text-on-surface-variant font-label-sm">--</td>
+<td class="px-lg py-md text-right">
+<button class="p-xs text-on-surface-variant opacity-30 cursor-not-allowed"><span class="material-symbols-outlined">download</span></button>
+<button class="p-xs text-on-surface-variant opacity-30 cursor-not-allowed ml-sm"><span class="material-symbols-outlined">share</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Footer Shell -->
+<footer class="mt-2xl py-md border-t border-outline-variant flex justify-between items-center opacity-80">
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 VendorBridge ERP. All rights reserved.</p>
+<div class="flex gap-lg">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">Security Compliance</a>
+</div>
+</footer>
+</div>
+</main>
+<!-- Modal for Export Settings (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-lg" id="exportModal">
+<div class="absolute inset-0 bg-on-background/30 backdrop-blur-sm"></div>
+<div class="relative w-full max-w-md bg-white rounded-xl shadow-2xl border border-outline-variant overflow-hidden animate-in fade-in zoom-in duration-200">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<h3 class="font-headline-sm text-headline-sm">Export Analytics</h3>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors" onclick="toggleModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-lg space-y-lg">
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant">Export Format</label>
+<div class="grid grid-cols-2 gap-md">
+<button class="flex flex-col items-center gap-sm p-md border-2 border-primary rounded-xl bg-primary/5">
+<span class="material-symbols-outlined text-[32px] text-primary">picture_as_pdf</span>
+<span class="font-bold">PDF Report</span>
+</button>
+<button class="flex flex-col items-center gap-sm p-md border border-outline-variant rounded-xl hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[32px] text-on-surface-variant">table_chart</span>
+<span class="font-bold">Excel Dataset</span>
+</button>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant">Include Sections</label>
+<div class="space-y-xs">
+<label class="flex items-center gap-md p-sm hover:bg-surface-container rounded-lg cursor-pointer">
+<input checked="" class="w-4 h-4 text-primary focus:ring-primary rounded" type="checkbox"/>
+<span class="font-body-md">Executive Summary</span>
+</label>
+<label class="flex items-center gap-md p-sm hover:bg-surface-container rounded-lg cursor-pointer">
+<input checked="" class="w-4 h-4 text-primary focus:ring-primary rounded" type="checkbox"/>
+<span class="font-body-md">Vendor Performance Matrix</span>
+</label>
+<label class="flex items-center gap-md p-sm hover:bg-surface-container rounded-lg cursor-pointer">
+<input class="w-4 h-4 text-primary focus:ring-primary rounded" type="checkbox"/>
+<span class="font-body-md">Raw Transaction Data</span>
+</label>
+</div>
+</div>
+</div>
+<div class="p-lg border-t border-outline-variant bg-surface-container-low flex justify-end gap-md">
+<button class="px-lg py-sm font-label-md text-on-surface-variant hover:text-on-surface" onclick="toggleModal()">Cancel</button>
+<button class="px-lg py-sm bg-primary text-white rounded-lg font-label-md shadow-sm">Generate Report</button>
+</div>
+</div>
+</div>
+<!-- Chart Scripts -->
+<script>
+        // Setup Chart.js Defaults for Brand Consistency
+        Chart.defaults.font.family = "'Hanken Grotesk', sans-serif";
+        Chart.defaults.color = "#4d4635";
+        Chart.defaults.plugins.tooltip.backgroundColor = "#1a1c1c";
+        Chart.defaults.plugins.tooltip.titleFont = { weight: 'bold' };
+        
+        // Monthly Spend Chart
+        const spendCtx = document.getElementById('monthlySpendChart').getContext('2d');
+        new Chart(spendCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                datasets: [{
+                    label: 'Spend ($M)',
+                    data: [2.1, 2.4, 2.8, 2.3, 3.1, 3.5, 3.2, 3.8, 4.2],
+                    borderColor: '#745b00',
+                    backgroundColor: 'rgba(116, 91, 0, 0.05)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#745b00',
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
+                    x: { grid: { display: false } }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Category Pie Chart
+        const pieCtx = document.getElementById('categoryPieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Raw Materials', 'Logistics', 'IT & Hardware', 'Services'],
+                datasets: [{
+                    data: [45, 22, 18, 15],
+                    backgroundColor: ['#745b00', '#f3ca4a', '#84540f', '#5f5e5e'],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Vendor Performance Chart
+        const performanceCtx = document.getElementById('vendorPerformanceChart').getContext('2d');
+        new Chart(performanceCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Global Logistics Co', 'Apex Systems', 'Nexa Manufacturing', 'Prime Parts Ltd', 'Swift Delivery'],
+                datasets: [{
+                    label: 'Efficiency Score',
+                    data: [98, 92, 88, 85, 82],
+                    backgroundColor: '#f3ca4a',
+                    borderRadius: 4,
+                    barThickness: 32
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { max: 100, grid: { color: 'rgba(0,0,0,0.05)' } },
+                    y: { grid: { display: false } }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // UI Interactions
+        function toggleModal() {
+            const modal = document.getElementById('exportModal');
+            modal.classList.toggle('hidden');
+        }
+
+        // Add event listener to "Export Data" button
+        document.querySelector('button.bg-primary').addEventListener('click', toggleModal);
+    </script>
+</body></html>
