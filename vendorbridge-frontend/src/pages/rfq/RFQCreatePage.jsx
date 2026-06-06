@@ -6,7 +6,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { createRFQ, uploadRFQAttachment } from '../../api/rfqApi';
-import { getVendors } from '../../api/vendorApi';
+import { getVendors, isAssignableVendor } from '../../api/vendorApi';
 import PageWrapper from '../../components/layout/PageWrapper';
 import FormInput from '../../components/forms/FormInput';
 import FormTextarea from '../../components/forms/FormTextarea';
@@ -198,26 +198,38 @@ const RFQCreatePage = () => {
         {/* Vendor Selection */}
         <div className="bg-surface p-lg rounded-xl border border-outline-variant card-shadow space-y-lg">
           <h3 className="font-headline-sm text-headline-sm pb-sm border-b border-outline-variant">Assign Suppliers</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-md max-h-60 overflow-y-auto custom-scrollbar">
-            {vendors.filter(v => v.status === 'Verified').map((vendor) => (
-              <label
-                key={vendor.id}
-                className={`flex items-center gap-md p-md border rounded-xl cursor-pointer hover:bg-surface-container transition-colors ${
-                  assignedVendors.includes(vendor.id) ? 'border-primary bg-primary-fixed/20' : 'border-outline-variant bg-surface-container-lowest'
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  checked={assignedVendors.includes(vendor.id)}
-                  onChange={() => handleVendorToggle(vendor.id)}
-                  className="w-5 h-5 rounded border-outline text-primary focus:ring-primary-container"
-                />
-                <div>
-                  <p className="font-bold text-on-surface">{vendor.company_name}</p>
-                  <p className="text-xs text-on-surface-variant font-label-sm">{vendor.category} | Rating: {vendor.rating}</p>
-                </div>
-              </label>
-            ))}
+          <div className="space-y-md">
+            <p className="text-sm text-on-surface-variant">
+              Choose one or more active vendors to receive this RFQ.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-md max-h-72 overflow-y-auto custom-scrollbar">
+              {vendors.filter(isAssignableVendor).map((vendor) => (
+                <label
+                  key={vendor.id}
+                  className={`flex items-center gap-md p-md border rounded-xl cursor-pointer hover:bg-surface-container transition-colors ${
+                    assignedVendors.includes(vendor.id) ? 'border-primary bg-primary-fixed/20' : 'border-outline-variant bg-surface-container-lowest'
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={assignedVendors.includes(vendor.id)}
+                    onChange={() => handleVendorToggle(vendor.id)}
+                    className="w-5 h-5 rounded border-outline text-primary focus:ring-primary-container"
+                  />
+                  <div className="min-w-0">
+                    <p className="font-bold text-on-surface truncate">{vendor.companyName || vendor.company_name}</p>
+                    <p className="text-xs text-on-surface-variant font-label-sm truncate">
+                      {(vendor.category?.categoryName || vendor.categoryName || vendor.category_name || 'Uncategorized')} | Rating: {vendor.rating ?? 0}
+                    </p>
+                  </div>
+                </label>
+              ))}
+            </div>
+            {vendors.filter(isAssignableVendor).length === 0 && (
+              <div className="rounded-lg border border-dashed border-outline-variant p-md text-sm text-on-surface-variant">
+                No assignable vendors are available right now. Make sure vendors are created with an active or verified status.
+              </div>
+            )}
           </div>
         </div>
 

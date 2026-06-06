@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { getPendingApprovals, getApprovalHistory, approveQuotation, rejectQuotation } from '../../api/approvalApi';
 import { usePermissions } from '../../hooks/usePermissions';
@@ -11,8 +12,23 @@ import { formatCurrency, formatDateTime } from '../../utils/formatters';
 const ApprovalPage = () => {
   const queryClient = useQueryClient();
   const { isManager, isAdmin } = usePermissions();
-  const [activeTab, setActiveTab] = useState('pending');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tabFromQuery = searchParams.get('tab');
+  const [activeTab, setActiveTab] = useState(tabFromQuery === 'history' ? 'history' : 'pending');
   const [remarks, setRemarks] = useState({});
+
+  useEffect(() => {
+    if (tabFromQuery === 'pending' || tabFromQuery === 'history') {
+      setActiveTab(tabFromQuery);
+    }
+  }, [tabFromQuery]);
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.set('tab', tab);
+    setSearchParams(nextParams, { replace: true });
+  };
 
   const { data: pending = [], isLoading: isPendingLoading } = useQuery({
     queryKey: ['pendingApprovals'],
@@ -70,7 +86,7 @@ const ApprovalPage = () => {
       {/* Tabs */}
       <div className="flex border-b border-outline-variant mt-md">
         <button
-          onClick={() => setActiveTab('pending')}
+          onClick={() => handleTabChange('pending')}
           className={`px-lg py-md font-semibold text-body-md border-b-2 transition-colors ${
             activeTab === 'pending'
               ? 'border-primary text-primary'
@@ -80,7 +96,7 @@ const ApprovalPage = () => {
           Pending Approvals ({pending.length})
         </button>
         <button
-          onClick={() => setActiveTab('history')}
+          onClick={() => handleTabChange('history')}
           className={`px-lg py-md font-semibold text-body-md border-b-2 transition-colors ${
             activeTab === 'history'
               ? 'border-primary text-primary'

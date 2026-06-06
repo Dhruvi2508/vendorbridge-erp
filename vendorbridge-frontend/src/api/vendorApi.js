@@ -1,12 +1,75 @@
 import api from './axios';
 
+export const normalizeVendor = (vendor) => {
+  if (!vendor) {
+    return vendor;
+  }
+
+  const categoryName = vendor.category_name || vendor.category?.categoryName || vendor.category?.category_name || vendor.categoryName || '';
+  const categoryId = vendor.category_id || vendor.category?.id || vendor.categoryId || null;
+  const status = vendor.status || vendor.vendor_status || vendor.vendorStatus || null;
+
+  return {
+    ...vendor,
+    id: vendor.id,
+    vendor_code: vendor.vendor_code || vendor.vendorCode || '',
+    vendorCode: vendor.vendor_code || vendor.vendorCode || '',
+    company_name: vendor.company_name || vendor.companyName || '',
+    companyName: vendor.company_name || vendor.companyName || '',
+    contact_person: vendor.contact_person || vendor.contactPerson || '',
+    contactPerson: vendor.contact_person || vendor.contactPerson || '',
+    email: vendor.email || '',
+    phone: vendor.phone || '',
+    alternate_phone: vendor.alternate_phone || vendor.alternatePhone || '',
+    alternatePhone: vendor.alternate_phone || vendor.alternatePhone || '',
+    website: vendor.website || '',
+    address: vendor.address || '',
+    city: vendor.city || '',
+    state: vendor.state || '',
+    country: vendor.country || '',
+    postal_code: vendor.postal_code || vendor.postalCode || '',
+    postalCode: vendor.postal_code || vendor.postalCode || '',
+    tax_id: vendor.tax_id || vendor.taxId || '',
+    taxId: vendor.tax_id || vendor.taxId || '',
+    gst_number: vendor.gst_number || vendor.gstNumber || '',
+    gstNumber: vendor.gst_number || vendor.gstNumber || '',
+    pan_number: vendor.pan_number || vendor.panNumber || '',
+    panNumber: vendor.pan_number || vendor.panNumber || '',
+    bank_name: vendor.bank_name || vendor.bankName || '',
+    bankName: vendor.bank_name || vendor.bankName || '',
+    bank_account_number: vendor.bank_account_number || vendor.bankAccountNumber || '',
+    bankAccountNumber: vendor.bank_account_number || vendor.bankAccountNumber || '',
+    bank_ifsc_code: vendor.bank_ifsc_code || vendor.bankIfscCode || '',
+    bankIfscCode: vendor.bank_ifsc_code || vendor.bankIfscCode || '',
+    status,
+    rating: vendor.rating ?? 0,
+    notes: vendor.notes || '',
+    category_id: categoryId,
+    categoryId,
+    category_name: categoryName,
+    categoryName,
+    category: vendor.category
+      ? {
+          ...vendor.category,
+          categoryName: categoryName,
+          category_name: categoryName,
+        }
+      : { id: categoryId, categoryName, category_name: categoryName },
+  };
+};
+
+export const isAssignableVendor = (vendor) => {
+  const status = (vendor?.status || '').toString().trim().toUpperCase();
+  return ['ACTIVE', 'VERIFIED', 'APPROVED', 'PENDING_APPROVAL'].includes(status);
+};
+
 export const getVendors = async () => {
   try {
     const res = await api.get('/api/vendors');
-    return res.data;
+    return Array.isArray(res.data) ? res.data.map(normalizeVendor) : [];
   } catch (err) {
     if (!err.response) {
-      return MOCK_VENDORS;
+      return MOCK_VENDORS.map(normalizeVendor);
     }
     throw new Error(err.response?.data?.message || 'Failed to fetch vendors.');
   }
@@ -15,11 +78,11 @@ export const getVendors = async () => {
 export const searchVendors = async (query) => {
   try {
     const res = await api.get(`/api/vendors/search?query=${query}`);
-    return res.data;
+    return Array.isArray(res.data) ? res.data.map(normalizeVendor) : [];
   } catch (err) {
     if (!err.response) {
       if (!query) return MOCK_VENDORS;
-      return MOCK_VENDORS.filter(v => 
+      return MOCK_VENDORS.map(normalizeVendor).filter(v => 
         v.company_name.toLowerCase().includes(query.toLowerCase()) ||
         v.gst_number.toLowerCase().includes(query.toLowerCase())
       );
@@ -31,10 +94,10 @@ export const searchVendors = async (query) => {
 export const getVendorById = async (id) => {
   try {
     const res = await api.get(`/api/vendors/${id}`);
-    return res.data;
+    return normalizeVendor(res.data);
   } catch (err) {
     if (!err.response) {
-      return MOCK_VENDORS.find(v => v.id === parseInt(id)) || MOCK_VENDORS[0];
+      return normalizeVendor(MOCK_VENDORS.find(v => v.id === parseInt(id)) || MOCK_VENDORS[0]);
     }
     throw new Error(err.response?.data?.message || 'Failed to fetch vendor.');
   }
@@ -43,7 +106,7 @@ export const getVendorById = async (id) => {
 export const createVendor = async (vendorData) => {
   try {
     const res = await api.post('/api/vendors', vendorData);
-    return res.data;
+    return normalizeVendor(res.data);
   } catch (err) {
     if (!err.response) {
       const category = MOCK_CATEGORIES.find(c => c.id === parseInt(vendorData.category_id))?.category_name || 'General';
@@ -57,7 +120,7 @@ export const createVendor = async (vendorData) => {
         ...vendorData
       };
       MOCK_VENDORS.push(newVendor);
-      return newVendor;
+      return normalizeVendor(newVendor);
     }
     throw new Error(err.response?.data?.message || 'Failed to create vendor.');
   }
@@ -66,7 +129,7 @@ export const createVendor = async (vendorData) => {
 export const updateVendor = async (id, vendorData) => {
   try {
     const res = await api.put(`/api/vendors/${id}`, vendorData);
-    return res.data;
+    return normalizeVendor(res.data);
   } catch (err) {
     if (!err.response) {
       const idx = MOCK_VENDORS.findIndex(v => v.id === parseInt(id));
@@ -76,9 +139,9 @@ export const updateVendor = async (id, vendorData) => {
           MOCK_VENDORS[idx].category = category;
         }
         MOCK_VENDORS[idx] = { ...MOCK_VENDORS[idx], ...vendorData };
-        return MOCK_VENDORS[idx];
+        return normalizeVendor(MOCK_VENDORS[idx]);
       }
-      return { id, ...vendorData };
+      return normalizeVendor({ id, ...vendorData });
     }
     throw new Error(err.response?.data?.message || 'Failed to update vendor.');
   }

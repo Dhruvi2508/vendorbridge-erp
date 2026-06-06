@@ -14,7 +14,7 @@ const signupSchema = zod.object({
   email: zod.string().email('Invalid email address').min(1, 'Email is required'),
   password: zod.string().min(6, 'Password must be at least 6 characters'),
   phone: zod.string().min(10, 'Phone must be at least 10 digits'),
-  role: zod.enum(['ADMIN', 'PROCUREMENT_OFFICER', 'VENDOR', 'MANAGER'], {
+  role: zod.enum(['ADMIN', 'PROCUREMENT_OFFICER', 'VENDOR_MANAGER', 'APPROVER'], {
     errorMap: () => ({ message: 'Please select a valid role' })
   })
 });
@@ -24,7 +24,7 @@ const SignupPage = () => {
   
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(signupSchema),
-    defaultValues: { firstName: '', lastName: '', email: '', password: '', phone: '', role: 'VENDOR' }
+    defaultValues: { firstName: '', lastName: '', email: '', password: '', phone: '', role: 'VENDOR_MANAGER' }
   });
 
   const onSubmit = async (data) => {
@@ -128,9 +128,9 @@ const SignupPage = () => {
               label="Account Role"
               icon="shield"
               options={[
-                { value: 'VENDOR', label: 'Vendor / Supplier' },
+                { value: 'VENDOR_MANAGER', label: 'Vendor / Supplier' },
                 { value: 'PROCUREMENT_OFFICER', label: 'Procurement Officer' },
-                { value: 'MANAGER', label: 'Manager / Approver' }
+                { value: 'APPROVER', label: 'Manager / Approver' }
               ]}
               error={errors.role}
               {...register('role')}

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_BASE_URL) || 'http://localhost:8080',
+  baseURL: (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_BASE_URL) || 'http://localhost:8081',
   headers: { 'Content-Type': 'application/json' },
 });
 
@@ -20,7 +20,11 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (err.response?.status === 401) {
+    const requestUrl = err.config?.url || '';
+    const isSessionValidationRequest =
+      requestUrl.includes('/api/auth/me') || requestUrl.includes('/api/auth/refresh-token');
+
+    if (err.response?.status === 401 && isSessionValidationRequest) {
       localStorage.removeItem('vendorbridge_token');
       localStorage.removeItem('vendorbridge-auth'); // Zustand storage key
       window.location.href = '/login';

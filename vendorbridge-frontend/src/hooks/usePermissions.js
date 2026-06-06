@@ -7,8 +7,8 @@ export const usePermissions = () => {
 
   const isAdmin = normalizedRole === 'ADMIN';
   const isProcurementOfficer = normalizedRole === 'PROCUREMENT_OFFICER';
-  const isVendor = normalizedRole === 'VENDOR';
-  const isManager = normalizedRole === 'MANAGER' || normalizedRole === 'MANAGER/APPROVER' || normalizedRole === 'APPROVER';
+  const isVendor = normalizedRole === 'VENDOR' || normalizedRole === 'VENDOR_MANAGER';
+  const isManager = normalizedRole === 'MANAGER' || normalizedRole === 'APPROVER';
 
   const canAccessUserManagement = isAdmin;
   const canManageVendors = isAdmin || isProcurementOfficer;

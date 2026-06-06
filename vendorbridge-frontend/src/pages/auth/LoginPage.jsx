@@ -6,6 +6,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { login } from '../../api/authApi';
 import { useAuthStore } from '../../store/authStore';
+import { getDashboardPathForRole } from '../../utils/rbac';
 import FormInput from '../../components/forms/FormInput';
 
 const loginSchema = zod.object({
@@ -25,9 +26,14 @@ const LoginPage = () => {
   const onSubmit = async (data) => {
     try {
       const result = await login(data.email, data.password);
+
+      if (!result?.token) {
+        throw new Error('Login failed: token not received from server.');
+      }
+
       setAuth(result.user, result.token, result.role);
       toast.success('Successfully logged in!');
-      navigate('/dashboard');
+      navigate(getDashboardPathForRole(result.role), { replace: true });
     } catch (err) {
       toast.error(err.message || 'Login failed.');
     }
