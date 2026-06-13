@@ -16,15 +16,16 @@ api.interceptors.request.use((config) => {
   return Promise.reject(error);
 });
 
-// Handle 401 globally → logout & redirect
+// Handle 401 globally → clear stale token & redirect to login
 api.interceptors.response.use(
   (res) => res,
   (err) => {
     const requestUrl = err.config?.url || '';
-    const isSessionValidationRequest =
-      requestUrl.includes('/api/auth/me') || requestUrl.includes('/api/auth/refresh-token');
+    const isAuthRequest = requestUrl.includes('/api/auth/login') || requestUrl.includes('/api/auth/register');
 
-    if (err.response?.status === 401 && isSessionValidationRequest) {
+    // If any non-auth request returns 401, the token is expired/invalid — log out
+    if (err.response?.status === 401 && !isAuthRequest) {
+      console.warn('[axios] 401 received — clearing expired session and redirecting to login');
       localStorage.removeItem('vendorbridge_token');
       localStorage.removeItem('vendorbridge-auth'); // Zustand storage key
       window.location.href = '/login';
@@ -34,3 +35,4 @@ api.interceptors.response.use(
 );
 
 export default api;
+

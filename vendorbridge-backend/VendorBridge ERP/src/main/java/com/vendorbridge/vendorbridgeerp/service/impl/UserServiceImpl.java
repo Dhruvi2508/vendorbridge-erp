@@ -39,17 +39,25 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + id));
 
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setPhone(request.getPhone());
-        user.setDepartment(request.getDepartment());
+        if (request.getFirstName() != null) {
+            user.setFirstName(request.getFirstName());
+        }
+        if (request.getLastName() != null) {
+            user.setLastName(request.getLastName());
+        }
+        if (request.getPhone() != null) {
+            user.setPhone(request.getPhone());
+        }
+        if (request.getDepartment() != null) {
+            user.setDepartment(request.getDepartment());
+        }
 
         if (request.getStatus() != null) {
-            user.setStatus(UserStatus.valueOf(request.getStatus()));
+            user.setStatus(UserStatus.valueOf(request.getStatus().toUpperCase()));
         }
 
         if (request.getRole() != null) {
-            RoleType roleType = RoleType.valueOf(request.getRole());
+            RoleType roleType = RoleType.valueOf(request.getRole().toUpperCase());
             Role role = roleRepository.findByRoleType(roleType)
                     .orElseThrow(() -> new IllegalArgumentException("Role not found: " + roleType));
             user.setRole(role);

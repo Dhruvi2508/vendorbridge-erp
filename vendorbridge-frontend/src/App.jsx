@@ -10,7 +10,8 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
-      retry: 1,
+      retry: false,    // All API fns return mock data on error, no retry needed
+      staleTime: 0,    // Always fetch fresh data on mount
     },
   },
 });

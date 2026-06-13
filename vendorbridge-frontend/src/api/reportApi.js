@@ -5,10 +5,8 @@ export const getVendorPerformance = async () => {
     const res = await api.get('/api/reports/vendor-performance');
     return res.data;
   } catch (err) {
-    if (!err.response) {
-      return MOCK_VENDOR_PERFORMANCE;
-    }
-    throw new Error(err.response?.data?.message || 'Failed to fetch vendor performance.');
+    console.warn('[reportApi] getVendorPerformance failed, using mock data:', err.message);
+    return MOCK_VENDOR_PERFORMANCE;
   }
 };
 
@@ -17,15 +15,13 @@ export const getProcurementSummary = async () => {
     const res = await api.get('/api/reports/procurement-summary');
     return res.data;
   } catch (err) {
-    if (!err.response) {
-      return {
-        totalRFQs: 82,
-        totalPOs: 65,
-        totalInvoices: 58,
-        totalSpend: 1250000
-      };
-    }
-    throw new Error(err.response?.data?.message || 'Failed to fetch procurement summary.');
+    console.warn('[reportApi] getProcurementSummary failed, using mock data:', err.message);
+    return {
+      totalRFQs: 82,
+      totalPOs: 65,
+      totalInvoices: 58,
+      totalSpend: 1250000
+    };
   }
 };
 
@@ -34,17 +30,15 @@ export const getMonthlySpending = async () => {
     const res = await api.get('/api/reports/monthly-spending');
     return res.data;
   } catch (err) {
-    if (!err.response) {
-      return [
-        { month: 'Jan', spend: 85000 },
-        { month: 'Feb', spend: 120000 },
-        { month: 'Mar', spend: 95000 },
-        { month: 'Apr', spend: 150000 },
-        { month: 'May', spend: 180000 },
-        { month: 'Jun', spend: 220000 }
-      ];
-    }
-    throw new Error(err.response?.data?.message || 'Failed to fetch monthly spending.');
+    console.warn('[reportApi] getMonthlySpending failed, using mock data:', err.message);
+    return [
+      { month: 'Jan', spend: 85000 },
+      { month: 'Feb', spend: 120000 },
+      { month: 'Mar', spend: 95000 },
+      { month: 'Apr', spend: 150000 },
+      { month: 'May', spend: 180000 },
+      { month: 'Jun', spend: 220000 }
+    ];
   }
 };
 

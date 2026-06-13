@@ -44,12 +44,16 @@ const VendorListPage = () => {
   // Queries
   const { data: vendors = [], isLoading: isVendorsLoading } = useQuery({
     queryKey: ['vendors', searchTerm],
-    queryFn: () => (searchTerm ? searchVendors(searchTerm) : getVendors())
+    queryFn: () => (searchTerm ? searchVendors(searchTerm) : getVendors()),
+    retry: false,
+    staleTime: 0
   });
 
   const { data: categories = [] } = useQuery({
     queryKey: ['categories'],
-    queryFn: getCategories
+    queryFn: getCategories,
+    retry: false,
+    staleTime: 30000
   });
 
   // Mutations
@@ -123,8 +127,8 @@ const VendorListPage = () => {
 
   // Filter vendors
   const filteredVendors = vendors.filter((v) => {
-    const matchesCategory = categoryFilter === 'All Categories' || v.category === categoryFilter;
-    const matchesStatus = statusFilter === 'All' || v.status === statusFilter;
+    const matchesCategory = categoryFilter === 'All Categories' || v.category_name === categoryFilter;
+    const matchesStatus = statusFilter === 'All' || (v.status || '').toLowerCase() === statusFilter.toLowerCase();
     return matchesCategory && matchesStatus;
   });
 
@@ -136,7 +140,7 @@ const VendorListPage = () => {
         <div className="flex items-center gap-md">
           <div className="w-10 h-10 rounded bg-surface-container flex items-center justify-center border border-outline-variant">
             <span className="material-symbols-outlined text-on-surface-variant">
-              {row.category === 'Logistics' ? 'local_shipping' : row.category === 'Electronics' ? 'memory' : 'precision_manufacturing'}
+              {row.category_name === 'Logistics' ? 'local_shipping' : row.category_name === 'Electronics' ? 'memory' : 'precision_manufacturing'}
             </span>
           </div>
           <div>
@@ -148,10 +152,10 @@ const VendorListPage = () => {
     },
     {
       header: 'Category',
-      accessor: 'category',
+      accessor: 'category_name',
       render: (row) => (
         <span className="px-sm py-1 bg-surface-container-highest text-on-surface text-[12px] font-medium rounded border border-outline-variant">
-          {row.category}
+          {row.category_name || '—'}
         </span>
       )
     },

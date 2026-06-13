@@ -10,8 +10,12 @@ export const APP_ROLES = {
 export const normalizeRole = (role) => {
   const normalized = (role || '').toUpperCase();
 
-  if (normalized === 'MANAGER/APPROVER') {
-    return 'APPROVER';
+  if (normalized === 'MANAGER/APPROVER' || normalized === 'APPROVER') {
+    return 'MANAGER';
+  }
+
+  if (normalized === 'VENDOR_MANAGER') {
+    return 'VENDOR';
   }
 
   return normalized;

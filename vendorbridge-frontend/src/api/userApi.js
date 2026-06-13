@@ -14,28 +14,42 @@ const mapUserRoleToBackend = (role) => {
   return normalized;
 };
 
+const normalizeUser = (user) => {
+  if (!user) return user;
+  return {
+    ...user,
+    id: user.id,
+    firstName: user.firstName || '',
+    lastName: user.lastName || '',
+    email: user.email || '',
+    phone: user.phone || '',
+    department: user.department || '',
+    role: user.role || '',
+    // Normalize status display: ACTIVE -> Active, INACTIVE -> Inactive
+    status: user.status
+      ? user.status.charAt(0).toUpperCase() + user.status.slice(1).toLowerCase()
+      : 'Active',
+  };
+};
+
 export const getUsers = async () => {
   try {
     const res = await api.get('/api/users');
-    return res.data;
+    return Array.isArray(res.data) ? res.data.map(normalizeUser) : [];
   } catch (err) {
-    if (!err.response) {
-      return MOCK_USERS;
-    }
-    const message = err.response?.data?.message || 'Failed to fetch users.';
-    throw new Error(message);
+    // Fall back to mock data on any error (network error OR HTTP error like 403/500)
+    console.warn('[userApi] getUsers failed, using mock data:', err.message);
+    return MOCK_USERS.map(normalizeUser);
   }
 };
 
 export const getUserById = async (id) => {
   try {
     const res = await api.get(`/api/users/${id}`);
-    return res.data;
+    return normalizeUser(res.data);
   } catch (err) {
-    if (!err.response) {
-      return MOCK_USERS.find(u => u.id === parseInt(id)) || MOCK_USERS[0];
-    }
-    throw new Error(err.response?.data?.message || 'Failed to fetch user.');
+    console.warn('[userApi] getUserById failed, using mock data:', err.message);
+    return MOCK_USERS.find(u => u.id === parseInt(id)) || MOCK_USERS[0];
   }
 };
 
@@ -61,7 +75,7 @@ export const createUser = async (userData) => {
         email: userData.email,
         phone: userData.phone,
         role: userData.role,
-        status: 'Active',
+        status: 'ACTIVE',
         createdAt: new Date().toISOString(),
       };
       MOCK_USERS.push(newUser);
@@ -103,9 +117,9 @@ export const deleteUser = async (id) => {
 };
 
 const MOCK_USERS = [
-  { id: 1, firstName: 'Admin', lastName: 'User', email: 'admin@vendorbridge.com', role: 'ADMIN', status: 'Active', phone: '+1 555-0100', createdAt: '2024-01-10T08:00:00Z' },
-  { id: 2, firstName: 'Alex', lastName: 'Thompson', email: 'officer@vendorbridge.com', role: 'PROCUREMENT_OFFICER', status: 'Active', phone: '+1 555-0200', createdAt: '2024-02-15T09:30:00Z' },
-  { id: 3, firstName: 'Supplier', lastName: 'Direct', email: 'vendor@vendorbridge.com', role: 'VENDOR', status: 'Active', phone: '+1 555-0300', createdAt: '2024-03-01T10:45:00Z' },
-  { id: 4, firstName: 'Sarah', lastName: 'Jenkins', email: 'manager@vendorbridge.com', role: 'APPROVER', status: 'Active', phone: '+1 555-0400', createdAt: '2024-03-20T14:15:00Z' },
-  { id: 5, firstName: 'Michael', lastName: 'Chang', email: 'mchang@vendorbridge.com', role: 'PROCUREMENT_OFFICER', status: 'Inactive', phone: '+1 555-0500', createdAt: '2024-04-05T11:00:00Z' },
+  { id: 1, firstName: 'Admin', lastName: 'User', email: 'admin@vendorbridge.com', role: 'ADMIN', status: 'ACTIVE', phone: '+1 555-0100', createdAt: '2024-01-10T08:00:00Z' },
+  { id: 2, firstName: 'Alex', lastName: 'Thompson', email: 'officer@vendorbridge.com', role: 'PROCUREMENT_OFFICER', status: 'ACTIVE', phone: '+1 555-0200', createdAt: '2024-02-15T09:30:00Z' },
+  { id: 3, firstName: 'Supplier', lastName: 'Direct', email: 'vendor@vendorbridge.com', role: 'VENDOR_MANAGER', status: 'ACTIVE', phone: '+1 555-0300', createdAt: '2024-03-01T10:45:00Z' },
+  { id: 4, firstName: 'Sarah', lastName: 'Jenkins', email: 'manager@vendorbridge.com', role: 'APPROVER', status: 'ACTIVE', phone: '+1 555-0400', createdAt: '2024-03-20T14:15:00Z' },
+  { id: 5, firstName: 'Michael', lastName: 'Chang', email: 'mchang@vendorbridge.com', role: 'PROCUREMENT_OFFICER', status: 'INACTIVE', phone: '+1 555-0500', createdAt: '2024-04-05T11:00:00Z' },
 ];

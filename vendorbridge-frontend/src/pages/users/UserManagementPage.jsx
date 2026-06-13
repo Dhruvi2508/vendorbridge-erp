@@ -30,7 +30,9 @@ const UserManagementPage = () => {
 
   const { data: users = [], isLoading } = useQuery({
     queryKey: ['users'],
-    queryFn: getUsers
+    queryFn: getUsers,
+    retry: false,
+    staleTime: 0
   });
 
   const createMutation = useMutation({
@@ -77,7 +79,8 @@ const UserManagementPage = () => {
   };
 
   const handleStatusToggle = (user) => {
-    const newStatus = user.status === 'Active' ? 'Inactive' : 'Active';
+    const currentStatusNormalized = (user.status || '').toUpperCase();
+    const newStatus = currentStatusNormalized === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE';
     updateMutation.mutate({ id: user.id, data: { status: newStatus } });
   };
 
@@ -111,9 +114,9 @@ const UserManagementPage = () => {
           className="border border-outline-variant rounded px-md py-sm bg-surface text-body-sm font-semibold focus:ring-1 focus:ring-primary-container outline-none"
         >
           <option value="ADMIN">ADMIN</option>
-          <option value="PROCUREMENT_OFFICER">PROCUREMENT_OFFICER</option>
-          <option value="VENDOR">VENDOR</option>
-          <option value="MANAGER">MANAGER</option>
+          <option value="PROCUREMENT_OFFICER">PROCUREMENT OFFICER</option>
+          <option value="VENDOR_MANAGER">VENDOR / SUPPLIER</option>
+          <option value="APPROVER">MANAGER / APPROVER</option>
         </select>
       )
     },

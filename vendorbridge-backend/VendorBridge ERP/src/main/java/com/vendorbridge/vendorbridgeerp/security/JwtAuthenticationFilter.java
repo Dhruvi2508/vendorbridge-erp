@@ -56,7 +56,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (Exception e) {
-            // In case of JWT extraction/validation error, let context remain unauthenticated
+            System.err.println("JWT Authentication failed: " + e.getMessage());
+            e.printStackTrace();
         }
 
         filterChain.doFilter(request, response);
